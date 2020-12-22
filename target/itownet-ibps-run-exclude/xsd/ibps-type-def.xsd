@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/ibps-type-def" 
+	targetNamespace="http://www.lc.com/ibps-type-def" elementFormDefault="qualified">
+	
+	<xs:element name="typedef" type="typedef"></xs:element>
+    
+    <xs:complexType name="typedef">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="categoryKey" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="typeKey" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="struType" type="xs:short" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="parentId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="depth" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="path" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="isLeaf" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="ownerId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="sn" type="xs:int" maxOccurs="1" minOccurs="0"></xs:element>
+			
+			<!-- 分类 -->
+			<xs:element name="typedefs" type="typedefs" maxOccurs="1" minOccurs="0"></xs:element>
+			<!-- 数据字典 -->
+			<xs:element name="dicdefs" type="dicdefs" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="typedefs">
+		<xs:sequence>
+			<xs:element name="typedef" type="typedef" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="dicdefs">
+		<xs:sequence>
+			<xs:element name="dicdef" type="dicdef" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="dicdef">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="typeId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="key" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="parentId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="sn" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

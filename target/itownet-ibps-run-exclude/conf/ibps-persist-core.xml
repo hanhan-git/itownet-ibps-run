@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byType">
+    
+	<context:annotation-config />
+	<context:component-scan base-package="com.lc.ibps.base.core.*" />
+	
+	<!-- spring上下文,可以获取 上下文的Context -->
+    <bean id="appUtil" class="com.lc.ibps.base.core.util.AppUtil" depends-on="corePlaceHolder"/>
+    <!-- <bean id="j2CacheUtil" class="com.lc.ibps.base.core.util.J2CacheUtil"/> -->
+    
+    <!-- <bean id="bootstrapFactory" class="com.lc.ibps.base.core.bootstrap.BootstrapFactory" depends-on="desktopInitialzation"/> -->
+	
+	<!-- properties 文件配置 -->
+	<bean id="corePlaceHolder" class="com.lc.ibps.base.core.spring.PropertyPlaceholderConfigurerExt" >
+	    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+	    <property name="fileEncoding" value="UTF-8"/>
+	    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+	    <property name="searchSystemEnvironment" value="true"/>
+	    <property name="locations">
+	        <list>
+	            <value>classpath:conf/*.properties</value>
+	            <value>classpath:conf/*/*.properties</value>
+	        </list>
+	    </property>
+	</bean>
+	<!-- Bean 加载配置 -->
+	<!-- <bean id="dynamicLoadBeanHolder" class="com.lc.ibps.base.core.spring.DynamicLoadBean"></bean> -->
+	
+	<!-- 脚本引擎用于执行groovy脚本 -->
+	<bean id="scriptEngine" class="com.lc.ibps.base.core.engine.script.GroovyScriptEngine">
+		<property name="bindingInterface">
+			<list>
+				<value>com.lc.ibps.base.core.engine.script.IScript</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

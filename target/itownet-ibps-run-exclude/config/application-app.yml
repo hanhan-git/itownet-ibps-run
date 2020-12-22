@@ -1,0 +1,193 @@
+#系统发送消息配置的路径
+baseUrl: ${BASE_URL:http://localhost}
+##---------系统配置---------
+#开发ID，默认lc
+#每个人的ID必须不一样，建议使用电话号码或工号
+appid: lc
+#项目路径 这个是开发时配置的路径
+project:
+  path: 
+##---------定时器配置---------
+quartz:
+  group: ${QUARTZ_GROUP:common,org,bpmn}
+  auto:
+    startup: ${QUARTZ_AUTO_STARTUP:false}  
+#是否显示版本信息
+showVer: ${SHOW_VER:true}
+##日志记录方式
+## direct/disruptor
+log:
+  util: ${LOG_UTIL:disruptor}
+##---------disruptor配置---------
+disruptor:
+  invoke:
+    enabled: ${DISRUPTOR_INVOKE_ENABLED:true}
+  bufferSize: ${DISRUPTOR_BUFFERSIZE:32}
+  threadSize: ${DISRUPTOR_THREADSIZE:32}
+  waitStrategy:
+    strategy: ${DISRUPTOR_WAITSTRATEGY_STRATEGY:blocking}
+    timeout: ${DISRUPTOR_WAITSTRATEGY_TIMEOUT:3}
+##---------数据库配置---------
+#数据库类型 oracle,mysql,postgres,mssql
+db:
+  dbType: ${DB_TYPE:oracle}
+  #是否加密
+  encrypt: false
+  #是否支持分区
+  supportPartition: false
+id:
+  # 工作ID (0~31)
+  worker-id: ${ID_WORKER_ID:0}
+  # 数据中心ID (0~31)
+  datacenter-id: ${ID_DATACENTER_ID:0}
+#----------阿里云.云通信短信服务配置----------
+#--企业版集成
+enterprise:
+  sms:
+    api:
+      appkey: ${ENTERPRISE_SMS_API_APPKEY:}
+      secret: ${ENTERPRISE_SMS_API_SECRET:}
+      signName: ${ENTERPRISE_SMS_API_SIGNNAME:}
+      templateCode: ${ENTERPRISE_SMS_API_TEMPLATECODE:}  
+#------------wechat的配置   --------
+wechat:
+  getToken: ${WECHAT_GETTOKEN:https://qyapi.weixin.qq.com/cgi-bin/gettoken}
+  sendMessage: ${WECHAT_SENDMESSAGE:https://qyapi.weixin.qq.com/cgi-bin/message/send}
+  #微信应用的agentid
+  agentId: ${WECHAT_AGENTID:1}
+  corpid: ${WECHAT_CORPID:}
+  corpsecret: ${WECHAT_CORPSECRET:}
+  messageType: ${WECHAT_MESSAGETYPE:text}       
+#----------启用注册登录----------
+register:
+  enable: ${REGISTER_ENABLE:false}
+  telephone: ${REGISTER_TELEPHONE:400-885-0207}
+  ## 启用注册存储路径
+  dir: ${REGISTER_DIR:/tmp/register/db}
+  db: 
+    ## 数据库类型，sqlite/hsqldb
+    type: sqlite
+    ## sqlite配置-----------
+    file: ${REGISTER_DB_FILE:register.v3.db}
+app:
+  submit:
+    limit:
+      enabled: ${SUBMIT_LIMIT_ENABLED:false}
+##业务对象生成表前缀，默认T_开头
+business:
+  table:
+    profix: ${BUSINESS_TABLE_PROFIX:T_}
+  control:
+    transfer:
+      form:
+        enabled: ${BUSINESS_CONTROL_TRANSFER_FORM_ENABLED:false}
+      datatemplate:
+        list:
+          enabled: ${BUSINESS_CONTROL_TRANSFER_DATATEMPLATE_LIST_ENABLED:false}
+##office 预览集成
+office:
+  home: /tmp/OpenOffice4/provider/boot
+  #输出
+  outputDir: /tmp/file/provider/boot
+## 第三方接入申请通知接收人账号，多个请用“,”分隔
+auth:
+  auditor:
+    account: ${AUTH_AUDITOR_ACCOUNT:admin}
+  ##接口调用限制
+  app:
+    api:
+      limit: ${AUTH_APP_API_LIMIT:120}
+      test:
+        limit: ${AUTH_APP_API_TEST_LIMIT:60}   
+##---------文件上传---------
+#fastdfs:fastdfs,db:数据库，disk:硬盘,mongodb:mongo数据库
+file:
+  saveType: ${FILE_SAVETYPE:disk}
+  #window系统采用\\,linux采用/
+  upload: D:\\tmp
+  #相对路径，则要把file.upload 去掉
+  #file.realpath=/attachFiles/temp
+  #####  文件上传的格式路径 ,默认 {uploadType}/{yyyy}/{MM}；
+  ##### 可以支持{curAccount}、 {curUserName}、{yyyy}、{MM}、{dd},文件夹中间/分割
+  formatTpl: "{uploadType}/{yyyy}/{MM}"
+  #最大文件上传限制，单位字节. 100M=100*1024*1024(B)=104857600 bytes 
+  maxUploadSize: 104857600                 
+####################流程配置
+#流程引擎名称
+bpmx:
+  engine:
+    name: ibps
+    #ativiti 自动建表
+    databaseSchemaUpdate: false 
+    #ativiti 任务调度
+    jobExecutorActivate: false
+    asyncExecutorEnabled: false
+    asyncExecutorActivate: false
+    #activiti history模式
+    dbIdentityUsed: ${BPMX_ENGINE_DBIDENTITYUSED:false}
+    dbHistoryUsed: ${BPMX_ENGINE_DBHISTORYUSED:true}
+    #可配置的历史级别有 none, acitivity, audit, all
+    # none: 跳过所有的历史数据。性能最优，但是没有历史数据。
+    # activity: 保存所有的流程实例和活动信息。只保留最后信息，没有明细信息。
+    # audit: 默认级别。保存所有的流程实例，任务、活动、表单属性等信息。
+    # full: 最高级别，最完整的的历史信息。除了audit中的信息外，还包含详细信息。
+    history: ${BPMX_ENGINE_HISTORY:none}
+##---------流程图颜色---------
+processDiagram:
+  pending: "#e21100"
+  submit: "#4283fd"
+  resubmit: "#f7ac3d"
+  agree: "#04B913"
+  oppose: "#5c3219"
+  reject: "#bcc330"
+  rejectToStart: "#e46b22"
+  rejectToPrevious: "#ff32ca"
+  revoke: "#007db9"
+  recover: "#FF32CA"
+  recoverToStart: "#b022ae"
+  sign_pass: "#007747"
+  sign_no_pass: "#23ebb9"
+  abandon: "#6910d2"
+  manual_end: "#c7008b"
+  complete: "#15BC83"
+  suspend: "#9f4e3c"
+  signBackCancel: "#009ea8"
+  signRecoverCancel: "#8d8502"
+  passCancel: "#545a26"
+  notPassCancel: "#b5fe3d"
+  transforming: "#fe4367"
+  transAgree: "#839287"
+  transOppose: "#ef9193"
+  skip: "#8f92c9"
+  callSubProc: "#033651"
+  autoTask: "#2ec5ea"
+  #默认背景
+  default: "#999999"
+  #开始节点的边框颜色
+  start: "#000000"
+  #结束节点的边框颜色
+  end: "#000000"
+  task: "#f2f7fd"
+  eventBoundary: "#FFFFFF"
+bpm:
+  delegator:
+    #流程代理任务-委托人是否可见,true|false
+    visible: ${BPM_DELEGATOR_VISIBLE:false}
+  lock:
+    #流程锁定任务-其他候选人是否可见,true|false
+    visible: ${BPM_LOCK_VISIBLE:false}
+  node:
+    user:
+      show:
+        ##流程图查看显示候选人数量
+        count: ${BPM_NODE_USER_SHOW_COUNT:3}
+  def:
+    node:
+      user:
+        ##流程定义管理设置人员自动抽取：extract、no
+        extract: ${BPM_DEF_NODE_USER_EXTRACT:no} 
+  history:
+    ##流程审批历史转办是否显示
+    change:
+       show: ${BPM_HISTORY_CHANGE_SHOW:true}
+        

@@ -1,0 +1,5 @@
+spring:
+ profiles:
+  include: cloud-base,cloud-socket,cloud-fileserver
+server:
+  port: 15400

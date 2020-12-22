@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:context="http://www.springframework.org/schema/context" 
+	 xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd " default-lazy-init="true">
+	
+	<context:component-scan base-package="com.lc.ibps.common,com.lc.ibps.org" >
+		<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional" />
+	</context:component-scan>	
+	
+	<bean id="defaultPartyEngine" class="com.lc.ibps.org.engine.DefaultPartyEngine"/>
+	<!--
+	<bean id="logEngine" class="com.lc.ibps.common.log.disruptor.engine.LogEngine"></bean>
+	<bean id="logInitialzation" class="com.lc.ibps.common.bootstrap.LogInitialzation"></bean>
+	-->
+	
+	<!-- 
+   	<bean id="appDsHandler" class="com.lc.ibps.common.jms.handler.impl.AppDsHandler"></bean>
+   	<bean id="appCacheHandler" class="com.lc.ibps.common.jms.handler.impl.AppCacheHandler"></bean>
+	 -->
+   	
+    <!-- mq 消息发送实现类注册 -->
+    <!-- 
+     <bean id="appMqHandList" class="java.util.ArrayList">
+	  <constructor-arg>
+	   <list>
+		<ref bean="appDsHandler"/>
+		<ref bean="appCacheHandler"/>
+	   </list>
+	  </constructor-arg>
+	 </bean>
+     -->
+   	
+   	<!-- queue 队列声明 -->
+   	<!--
+    <rabbit:queue id="appDsQue" durable="false" auto-delete="false" exclusive="false" name="appDsQue"/>
+    <rabbit:queue id="appCacheQue" durable="false" auto-delete="false" exclusive="false" name="appCacheQue"/>
+   	-->
+    
+    <!-- exchange queue binging key 绑定 -->
+    <!--
+    <rabbit:direct-exchange name="app-mq-exchange" durable="false" auto-delete="false" id="app-mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="appDsQue" key="appDs"/>
+            <rabbit:binding queue="appCacheQue" key="appCache"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+    -->
+	
+	<!-- queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象-->
+    <!--
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+        <rabbit:listener queues="appDsQue" ref="appDsHandler" method="handle"/>
+        <rabbit:listener queues="appCacheQue" ref="appCacheHandler" method="handle"/>
+    </rabbit:listener-container>
+    -->
+	
+</beans>

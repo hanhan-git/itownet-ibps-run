@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<import resource="ibps-persist-core.xml" />  
+	<import resource="ibps-base-datasource-druid.xml" />
+	<import resource="ibps-base-datasource.xml" />
+	<import resource="ibps-base-db.xml" />
+    <import resource="ibps-web-context.xml" />  
+	<import resource="ibps-resources.xml" />   
+	<import resource="ibps-base-service.xml"/>
+	
+	<!-- 组件 -->
+	<import resource="ibps-component-upload-api.xml"/>
+	<import resource="ibps-component-upload.xml"/>
+	<import resource="ibps-component-quartz.xml"/>
+	<import resource="ibps-component-mail.xml"/>
+	<import resource="ibps-codegen-biz.xml"/>
+	<!-- 业务 -->
+	<import resource="ibps-msg-biz.xml"/>
+	<import resource="ibps-msg-jms.xml"/>
+	<import resource="ibps-org-biz.xml"/>
+	<import resource="ibps-bpmn-biz.xml" />
+	<import resource="ibps-base-bo.xml" />
+	<import resource="ibps-form-biz.xml" />
+	<import resource="ibps-excessive-platform.xml" />
+	<import resource="ibps-message-consumer.xml"/>
+	<import resource="ibps-socket-biz.xml"/>
+</beans>

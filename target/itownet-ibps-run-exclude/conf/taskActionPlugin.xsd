@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.bpmhome.cn/bpm/plugin/taskAction"
+    targetNamespace="http://www.bpmhome.cn/bpm/plugin/taskAction" elementFormDefault="qualified">
+    <xs:element name="taskAction">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="description">
+                	<xs:complexType>
+                		<xs:attribute name="value" type="xs:string" use="required"/>
+                	</xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="handlerClass">
+                	<xs:annotation>
+                		<xs:documentation>这个只是审批的时候需要(比如同意,反对)</xs:documentation>
+                	</xs:annotation>
+                	<xs:complexType>
+                		<xs:attribute name="value" type="xs:string" use="required"/>
+                	</xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="supportType" type="supportType"  use="required"/>
+            <xs:attribute name="actionType" type="actionType"  use="required"/>
+            <xs:attribute name="script" type="xs:boolean"  use="required" >
+            	<xs:annotation>
+            		<xs:documentation>是否支持脚本</xs:documentation>
+            	</xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="init" type="xs:boolean">
+            	<xs:annotation>
+            		<xs:documentation>初始化默认</xs:documentation>
+            	</xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="supportType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="usertask">
+    			<xs:annotation>
+    				<xs:documentation>用户任务专用</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="signtask">
+    			<xs:annotation>
+    				<xs:documentation>会签任务专用</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="none">
+    			<xs:annotation>
+    				<xs:documentation>都不支持</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="both">
+    			<xs:annotation>
+    				<xs:documentation>支持普通用户任务和会签任务</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="start">
+    			<xs:annotation>
+    				<xs:documentation>起始节点</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="all">
+    			<xs:annotation>
+    				<xs:documentation>所有节点</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="actionType">
+    	<xs:restriction base="xs:string">
+    		<xs:enumeration value="approve">
+    			<xs:annotation>
+    				<xs:documentation>审批</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="assist">
+    			<xs:annotation>
+    				<xs:documentation>辅助</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="reject">
+    			<xs:annotation>
+    				<xs:documentation>驳回</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="rejectToPrevious">
+    			<xs:annotation>
+    				<xs:documentation>驳回上一步</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="rejectToStart">
+    			<xs:annotation>
+    				<xs:documentation>驳回至发起人</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="revoke">
+    			<xs:annotation>
+    				<xs:documentation>撤销</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="commu">
+    			<xs:annotation>
+    				<xs:documentation>沟通</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		<xs:enumeration value="trans">
+    			<xs:annotation>
+    				<xs:documentation>任务流转</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    		
+    		<xs:enumeration value="other">
+    			<xs:annotation>
+    				<xs:documentation>其他</xs:documentation>
+    			</xs:annotation>
+    		</xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+    <xs:element name="taskActions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="taskAction"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="nameUnique">
+            <xs:selector xpath="taskAction"/>
+            <xs:field xpath="@name"/>
+        </xs:unique>
+    </xs:element>
+</xs:schema>

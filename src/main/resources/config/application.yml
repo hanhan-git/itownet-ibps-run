@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: ibps-boot-provider
+  cloud:
+    client:
+      ip-address: ${SPRING_CLIENT_IP:127.0.0.1}
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+    include: common,app
+# 外部tomcat部署时需要添加一下配置
+server:
+  servlet:
+    context-path: /apitest
+com:
+  lc:
+    mq:
+      enabled: false
+      command:
+        producer:
+          enabled: false
+      message:
+        consumer:
+          enabled: false
+swagger:
+  title: IBPS接口平台
+  description: IBPS接口服务平台接口文档说明
+  app.version: v3
+  base-package: com.lc
+  terms-of-service-url: walter
+  contact-name: walter
+  contact-email: walter
+  contact-url: walter
+  string-extensions:
+  - name: apiPrefix
+    value: /
+client:
+  gateway:
+    disable: true
+app:
+  ribbon-proxy: false    
+cache:
+  oauth:
+    system:
+      enabled: false
+  form:
+    system:
+      enabled: false
+  bpmn:
+    system:
+      enabled: false
+
+##---------apollo选项---------
+apollo:
+   bootstrap:
+      namespaces: application,ibps.bpmn-config,ibps.form-config,ibps.oauth-config,ibps.platform-config,ibps.common-config,ibps.ibps-common
+token:
+  authorization-code:
+    single: true
+

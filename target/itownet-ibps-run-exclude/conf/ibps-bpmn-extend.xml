@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	">				
+
+	<!-- 任务创建 -->
+	<bean id="taskCreateListener" class="com.lc.ibps.bpmn.activiti.ext.listener.task.impl.TaskCreateListener" autowire="default">
+		<property name="taskCommands">
+			<list>
+		 		<ref bean="pluginTaskCommand"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 任务完成 -->
+	<bean id="taskCompleteListener" class="com.lc.ibps.bpmn.activiti.ext.listener.task.impl.TaskCompleteListener">
+		<property name="taskCommands">
+			<list>
+		 		<ref bean="pluginTaskCommand"/>
+			</list>
+		</property>	
+	</bean>
+	
+	<!-- 会签任务创建 -->
+	<bean id="taskSignCreateListener" class="com.lc.ibps.bpmn.activiti.ext.listener.task.impl.TaskSignCreateListener">
+		<property name="taskCommands">
+			<list>
+		 		<ref bean="pluginTaskCommand"/>
+			</list>
+		</property>	
+	</bean>
+	
+	<!-- 流程启动 -->
+	<bean id="procStartListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.ProcStartListener">
+		<property name="executionCommands">
+			<list>
+		 		<ref bean="pluginExecutionCommand"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 流程结束 -->
+	<bean id="procEndListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.ProcEndListener">
+		<property name="executionCommands">
+			<list>
+		 		<ref bean="pluginExecutionCommand"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 自动任务处理 -->
+	<bean id="autoTaskDelegate" class="com.lc.ibps.bpmn.activiti.ext.autotask.AutoTaskDelegate">
+		<property name="executionCommands">
+			<list>
+		 		<ref bean="pluginExecutionCommand"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 外部子流程启动 -->
+	<bean id="callSubProcStartListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.CallSubProcStartListener"></bean>
+	<!-- 外部子流程结束 -->
+	<bean id="callSubProcEndListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.CallSubProcEndListener"></bean>
+	
+	<!-- 内部子流程启动 -->
+	<bean id="subProcStartListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.SubProcStartListener"></bean>
+	<!-- 内部子流程结束 -->
+	<bean id="subProcEndListener" class="com.lc.ibps.bpmn.activiti.ext.listener.execution.impl.SubProcEndListener"></bean>
+	
+</beans>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"    xmlns="http://www.lc.com/ibps-bo-def" 
+	targetNamespace="http://www.lc.com/ibps-bo-def" elementFormDefault="qualified">
+	
+	<xs:element name="bodef" type="bodef"></xs:element>
+    
+    <xs:complexType name="bodef">
+		<xs:sequence>
+			<xs:element name="mainbodef" type="mainbodef" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="subbodef" type="subbodef" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="mainbodef">
+		<xs:sequence>
+			<xs:element name="attribute" type="attribute" maxOccurs="unbounded" minOccurs="1"></xs:element>
+			<xs:element name="options" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+		
+		<xs:attribute name="code" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="dataformat" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="boType" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="isCreateTable" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="pk" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="typeId" type="xs:string"></xs:attribute>
+		<xs:attribute name="dsAlias" type="xs:string"></xs:attribute>
+		<xs:attribute name="desc" type="xs:string"></xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="subbodef">
+		<xs:sequence>
+			<xs:element name="attribute" type="attribute" maxOccurs="unbounded" minOccurs="1"></xs:element>
+			<xs:element name="options" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+		
+		<xs:attribute name="code" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="dataformat" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="boType" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="isCreateTable" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="pk" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="typeId" type="xs:string"></xs:attribute>
+		<xs:attribute name="dsAlias" type="xs:string"></xs:attribute>
+		<xs:attribute name="desc" type="xs:string"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="attribute">
+		<xs:attribute name="code" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="desc" type="xs:string"></xs:attribute>
+		<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="datatype" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="defaultvalue" type="xs:string"></xs:attribute>
+		<xs:attribute name="isrequire" type="xs:boolean" default="false"></xs:attribute>
+		<xs:attribute name="isnull" type="xs:string"></xs:attribute>
+		<xs:attribute name="format" type="xs:string"></xs:attribute>
+		<xs:attribute name="length" type="xs:int"></xs:attribute>
+		<xs:attribute name="precision" type="xs:int"></xs:attribute>
+		<xs:attribute name="sn" type="xs:int"></xs:attribute>
+	</xs:complexType>
+</xs:schema>

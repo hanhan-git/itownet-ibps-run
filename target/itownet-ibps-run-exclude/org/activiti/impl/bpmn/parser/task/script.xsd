@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/execution/taskscript"
+    targetNamespace="http://www.lc.com/bpm/plugins/execution/taskscript" elementFormDefault="qualified">
+    <xs:element name="taskScript" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>流程节点脚本插件</xs:documentation>
+        </xs:annotation>
+        
+    </xs:element>
+</xs:schema>    

@@ -1,0 +1,354 @@
+# 共有8个级别，按照从低到高为：ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+Configuration:
+  status: debug
+  monitorInterval: 30
+  properties: # 定义全局变量
+    property: # 缺省配置（用于开发环境）。其他环境需要在VM参数中指定，如下：
+      # jvm参数：-Dlog.level.console=warn
+      - name: log.level.console
+        value: debug
+      - name: log.path
+        value: ./logs
+      - name: project.name
+        value: ibps-boot-provider
+      - name: log.console.pattern
+        value: "%d{ISO8601} [%5.5X{threadid}] [${project.name}] [%X{appversion}] [thrid] [%X{operation}] [%X{traceid}] [%X{spanid}] [%X{serverip}] [%X{serverport}] [%X{clientip}] [%X{url}] [%X{method}] [%X{headers}] [%X{paramters}] [%X{uid}] [%5.5level] [%-30.30C{1.}] : %m%n"
+      - name: log.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} thrid %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.framework.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.framework %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.common.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.common %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.org.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.org %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.form.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.form %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.bo.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.form %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.codegen.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.form %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.bpmn.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.bpmn %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+      - name: log.ibps.office.pattern
+        value: "%d{ISO8601} %-1X{threadid} ${project.name} %-1X{appversion} ibps.bpmn %-1X{operation} %-1X{traceid} %-1X{spanid} %-1X{serverip} %-1X{serverport} %-1X{clientip} %-1X{url} %-1X{method} %-1X{headers} %-1X{paramters} %-1X{uid} %level %l : %m%n"
+  appenders:
+    # 启动日志-输出到控制台
+    Console:
+      - name: CONSOLE_LOG
+        target: SYSTEM_OUT
+        ThresholdFilter:
+          level: ${sys:log.level.console}
+          onMatch: ACCEPT
+          onMismatch: DENY
+        PatternLayout:
+          pattern: ${log.console.pattern}
+    #   启动日志-输出到文件
+    RollingFile:
+      - name: ROLLING_FILE
+        fileName: ${log.path}/${project.name}.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+      - name: IBPS_FRAMEWORK_ROLLING_FILE
+        fileName: ${log.path}/${project.name}_ibps_framework.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}_ibps_framework-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.ibps.framework.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+      - name: IBPS_COMMON_ROLLING_FILE
+        fileName: ${log.path}/${project.name}_ibps_common.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}_ibps_common-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.ibps.common.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+      - name: IBPS_ORG_ROLLING_FILE
+        fileName: ${log.path}/${project.name}_ibps_org.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}_ibps_org-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.ibps.org.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+      - name: IBPS_FORM_ROLLING_FILE
+        fileName: ${log.path}/${project.name}_ibps_form.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}_ibps_form-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.ibps.form.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+      - name: IBPS_BPMN_ROLLING_FILE
+        fileName: ${log.path}/${project.name}_ibps_bpmn.log
+        filePattern: "${log.path}/history/$${date:yyyy-MM}/${project.name}_ibps_bpmn-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${log.ibps.bpmn.pattern}
+        Filters:
+          #        一定要先去除不接受的日志级别，然后获取需要接受的日志级别
+          ThresholdFilter:
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        Policies:
+          TimeBasedTriggeringPolicy:  # 按天分类
+            modulate: true
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 100MB
+        DefaultRolloverStrategy:     # 文件最多100个
+          max: 100
+  Loggers:
+    AsyncRoot:
+      level: warn
+      includeLocation: true
+      AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+    AsyncLogger:
+      - name: org
+        additivity: false
+        includeLocation: true
+        level: info
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.eclipse
+        additivity: false
+        includeLocation: true
+        level: warn
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.quartz
+        additivity: false
+        includeLocation: true
+        level: warn
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.springframework
+        additivity: false
+        includeLocation: true
+        level: warn
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.activiti
+        additivity: false
+        includeLocation: true
+        level: warn
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.apache
+        additivity: false
+        includeLocation: true
+        level: warn
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: org.apache.ibatis
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: java.sql
+        additivity: false
+        includeLocation: true
+        level: error
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: java.sql.Statement
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: java.sql.PreparedStatement
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: springfox
+        additivity: false
+        includeLocation: true
+        level: error
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: pres.lnk.springframework
+        additivity: false
+        includeLocation: true
+        level: info
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: cn
+        additivity: false
+        includeLocation: true
+        level: error
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: com
+        additivity: false
+        includeLocation: true
+        level: error
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+      - name: com.lc
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_FRAMEWORK_ROLLING_FILE
+      - name: com.lc.ibps.common
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_COMMON_ROLLING_FILE
+      - name: com.lc.ibps.auth
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_COMMON_ROLLING_FILE
+      - name: com.lc.ibps.socket
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_COMMON_ROLLING_FILE
+      - name: com.lc.ibps.register
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_COMMON_ROLLING_FILE
+      - name: com.lc.ibps.org
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_ORG_ROLLING_FILE
+      - name: com.lc.ibps.base.bo
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_FORM_ROLLING_FILE
+      - name: com.lc.ibps.form
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_FORM_ROLLING_FILE
+      - name: com.lc.ibps.components.codegen
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_FORM_ROLLING_FILE
+      - name: com.lc.ibps.bpmn
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_BPMN_ROLLING_FILE
+      - name: com.lc.ibps.office
+        additivity: false
+        includeLocation: true
+        level: debug
+        AppenderRef:
+        - ref: CONSOLE_LOG
+        - ref: ROLLING_FILE
+        - ref: IBPS_BPMN_ROLLING_FILE

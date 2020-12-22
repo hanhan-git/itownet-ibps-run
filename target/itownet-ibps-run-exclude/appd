@@ -1,0 +1,30 @@
+#!/bin/bash
+# chkconfig: 2345 70 80
+# description: app script ....
+
+# this script move to /etc/init.d
+# must set variable script_home/script_username/script_memory
+
+script_home=/home/tomcat/eureka
+script_memory=512M
+script_username=tomcat
+script=$script_home/app.sh
+
+# See how we were called.
+case "$1" in
+  start)
+        su $script_username -l -c "sh $script -h $script_home -m $script_memory -c $1"
+        ;;
+  stop)
+        su $script_username -l -c "sh $script -h $script_home -c $1"
+        ;;
+  restart|reload)
+        su $script_username -l -c "sh $script -h $script_home -m $script_memory -c $1"
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload}"
+        exit 1
+esac
+
+exit
+

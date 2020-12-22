@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/ibps-dic-def" 
+	targetNamespace="http://www.lc.com/ibps-dic-def" elementFormDefault="qualified">
+	
+	<xs:element name="dicdef" type="dicdef"></xs:element>
+    
+    <xs:complexType name="dicdef">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="typeId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="key" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="parentId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="sn" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

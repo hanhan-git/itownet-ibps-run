@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util.xsd"> 	
+     
+     <!--插件命令对象-->
+	<bean id="pluginTaskCommand" class="com.lc.ibps.bpmn.plugin.core.cmd.PluginTaskCommand"/>
+	<bean id="pluginExecutionCommand" class="com.lc.ibps.bpmn.plugin.core.cmd.PluginExecutionCommand"/>
+	
+	<bean id="taskAopCommand" class="com.lc.ibps.bpmn.plugin.core.cmd.DefaultTaskAopCommand"/>	
+	
+	<!--插件工厂-->
+	<bean id="bpmPluginFactory" class="com.lc.ibps.bpmn.plugin.core.factory.DefaultBpmPluginFactory"></bean>
+	<bean id="bpmPluginSessionFactory" class="com.lc.ibps.bpmn.plugin.core.factory.DefaultBpmPluginSessionFactory"></bean>	
+		
+	<!--任务操作处理器配置类-->
+	<bean id="taskActionHandlerConfig" class="com.lc.ibps.bpmn.plugin.core.task.config.DefaultTaskActionHandlerConfig"  scope="singleton" init-method="init">
+		<property name="actionConfigXml" value="/conf/taskActionPlugins.xml"/>
+		<property name="taskActionHandleContext" ref="taskActionHandlerContext"></property>
+	</bean>
+	
+	<!--任务操作处理器上下文类-->
+	<bean id="taskActionHandlerContext" class="com.lc.ibps.bpmn.plugin.core.task.context.DefaultTaskActionHandlerContext"></bean>
+	
+	<!--执行类操作处理器配置类-->
+	<bean id="executionActionHandlerConfig" class="com.lc.ibps.bpmn.plugin.core.execution.config.DefaultExecutionActionHandlerConfig" scope="singleton" init-method="init">
+		<property name="actionConfigXml" value="classpath:conf/executionActionPlugins.xml"/>
+		<property name="executionActionHandlerContext" ref="executionActionHandlerContext"></property>
+	</bean>
+	
+	<!--执行类操作处理器上下文类-->
+	<bean id="executionActionHandlerContext" class="com.lc.ibps.bpmn.plugin.core.execution.context.DefaultExecutionActionHandlerContext"></bean>
+	
+</beans>		

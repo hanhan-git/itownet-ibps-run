@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executionActions xmlns="http://www.bpmhome.cn/bpm/plugin/executionAction"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.bpmhome.cn/bpm/plugin/executionAction executionActionPlugin.xsd"
+    targetNamespace="http://www.bpmhome.cn/bpm/plugin/executionAction">
+    
+</executionActions>

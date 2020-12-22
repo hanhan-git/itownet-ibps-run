@@ -1,0 +1,23 @@
+##Linux服务设置步骤
+##以下步骤均在linux下操作
+##以下操作在tomcat用户下操作，sudo用户
+##以eureka为例
+1、复制appd为eurekad，命令 cp appd eurekad;
+2、编辑eurekad，命令 vi eurekad;
+	a、修改变量script_home为当前目录；
+	b、修改变量script_module为当前模块名，与jar包名字一致；
+	c、修改变量script_memory为指定内存；
+3、保存退出，命令 :x ;
+4、复制eurekad到/etc/init.d/目录下，需要root权限，请使用 sudo cp eurekad /etc/init.d/;
+5、设置开机启动，命令 sudo chkconfig --add eurekad;
+6、允许开机启动，命令 sudo chkconfig eurekad on;
+7、测试启动，命令 sudo service eurekad start;
+7、测试重启，命令 sudo service eurekad restart;
+7、测试停止，命令 sudo service eurekad stop;
+
+##Linux下使用shell脚本启停应用
+sh app.sh -h [app.sh的绝对路径] -d [jar名称不带后缀] -m [内存:如1024M] -c [start|stop|restart]
+
+## docker镜像需要字体，请自行从window中C:\Windows\Fonts复制字体文件并将文件名改为小写放到本目录下
+1、黑体，simhei.ttf；
+2、宋体，simsun.ttc；

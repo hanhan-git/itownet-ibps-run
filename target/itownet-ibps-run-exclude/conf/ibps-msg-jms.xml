@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/rabbit 
+       http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+   	<bean id="aliEnterpriseMessage" class="com.lc.ibps.components.sms.alibaba.aliyun.AliyunMessageImpl"></bean>
+   	<bean id="aliPersonalMessage" class="com.lc.ibps.components.sms.alibaba.AlibabaMessageImpl"></bean>
+   	
+   	<!--
+   	<bean id="innerHandler" class="com.lc.ibps.common.jms.handler.impl.InnerHandler"></bean>
+   	<bean id="mailHandler" class="com.lc.ibps.common.jms.handler.impl.MailHandler"></bean>
+   	<bean id="smsHandler" class="com.lc.ibps.common.jms.handler.impl.SmsHandler"></bean>
+   	<bean id="wechatHandler" class="com.lc.ibps.common.jms.handler.impl.WechatHandler"></bean>
+   	-->
+   	
+    <!-- mq 消息发送实现类注册 -->
+     <!--
+     <bean id="mqHandList" class="java.util.ArrayList">
+	  <constructor-arg>
+	   <list>
+		<ref bean="innerHandler"/>
+		<ref bean="mailHandler"/>
+		<ref bean="smsHandler"/>
+		<ref bean="wechatHandler"/>
+	   </list>
+	  </constructor-arg>
+	 </bean>
+   	-->
+   	
+   	<!-- queue 队列声明
+    <rabbit:queue id="mailQue" durable="false" auto-delete="false" exclusive="false" name="mailQue"/>
+    <rabbit:queue id="innerQue" durable="false" auto-delete="false" exclusive="false" name="innerQue"/>
+    <rabbit:queue id="smsQue" durable="false" auto-delete="false" exclusive="false" name="smsQue"/>
+    <rabbit:queue id="wechatQue" durable="false" auto-delete="false" exclusive="false" name="wechatQue"/>-->
+    
+    <!-- exchange queue binging key 绑定 
+    <rabbit:direct-exchange name="my-mq-exchange" durable="false" auto-delete="false" id="my-mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="mailQue" key="mail"/>
+            <rabbit:binding queue="innerQue" key="inner"/>
+            <rabbit:binding queue="smsQue" key="sms"/>
+            <rabbit:binding queue="wechatQue" key="wechat"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>-->
+	
+	<!-- queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="auto">
+        <rabbit:listener queues="mailQue" ref="mailHandler" method="send"/>
+        <rabbit:listener queues="innerQue" ref="innerHandler" method="send"/>
+        <rabbit:listener queues="smsQue" ref="smsHandler" method="send"/>
+        <rabbit:listener queues="wechatQue" ref="wechatHandler" method="send"/>
+    </rabbit:listener-container>-->
+    
+</beans>

@@ -1,0 +1,1 @@
+=agent.namespace=ibps.v3.test,agent.service_name=boot,collector.backend_service=192.168.3.230:11800,logging.file_name=boot.15400.log

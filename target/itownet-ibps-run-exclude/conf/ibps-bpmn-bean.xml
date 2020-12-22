@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 跳转规则计算 -->
+	<bean id="jumpRuleCalc" class="com.lc.ibps.bpmn.utils.JumpRuleCalcImpl"></bean>
+	
+	<!-- 会签人员计算 -->	
+	<bean id="actUserService" class="com.lc.ibps.bpmn.activiti.ext.sign.ActUserService"></bean>
+	
+	<!-- 会签完成判断 开始 -->
+	<bean id="signComplete" class="com.lc.ibps.bpmn.activiti.ext.sign.ActSignComplete">
+		<property name="bpmSignComplete" ref="bpmSignComplete"></property>
+	</bean>
+	<bean id="bpmSignComplete" class="com.lc.ibps.bpmn.service.impl.SignCompleteSeviceImpl"></bean>
+	
+	<bean id="signActionHandlerContainer" class="com.lc.ibps.bpmn.handler.signTask.SignActionHandlerContainer">
+		<property name="actionHandlers">
+			<map>
+				<entry key="approve"  value-ref="signActionApproveHandler" />
+				<!-- <entry key="back" value-ref="backSignActionHandler" />
+				<entry key="rejectToStart" value-ref="backSignActionHandler" />
+				<entry key="rejectTo" value-ref="backSignActionHandler" /> -->
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="signActionApproveHandler" class="com.lc.ibps.bpmn.handler.signTask.SignActionApproveHandler"></bean>
+	<!-- 会签完成判断 结束-->
+	
+	<!-- 用户查询的帮助类 
+	<bean id="userQueryPluginHelper" class="com.lc.ibps.bpmn.core.helper.identity.UserQueryPluginHelperImpl"/>-->
+	<!-- 用户抽取的服务类 
+	<bean id="bpmIdentityExtractService" class="com.lc.ibps.bpmn.core.helper.identity.BpmIdentityExtractServiceImpl"/>-->
+	<!-- 流程定义处理类，用于操作流程的xml数据 
+	<bean id="bpmDefConditionService" class="com.lc.ibps.bpmn.core.engine.def.DefaultBpmDefConditionService"/>-->
+	
+	
+	
+	<bean id="diagramService" class="com.lc.ibps.bpmn.service.impl.BpmDiagramServiceImpl"/> 
+    <!--流程图状态-->
+   	<bean id="flowStatusService" class="com.lc.ibps.bpmn.service.impl.BpmProcStatusServiceImpl"/>
+	
+	<!-- 人员条件检查用户可以修改这个接口实现-->
+	<bean id="userConditionCheck" class="com.lc.ibps.bpmn.core.helper.identity.UserConditionCheck" ></bean>
+	
+	<!-- 表单数据修改 -->
+	<bean id="dataObjectHandler" class="com.lc.ibps.bpmn.core.engine.form.DefaultDataObjectHandler"></bean>
+	
+	<bean id="pluginContextContainer" class="com.lc.ibps.bpmn.core.engine.def.handler.PluginContextContainer">
+		<property name="pluginList" ref="autoTaskPluginList"></property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.lc.ibps.components</groupId>
+		<artifactId>ibps-component-root</artifactId>
+		<version>3.3.3-LC.RELEASE</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ibps-component-sms</artifactId>
+	
+	<properties>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.lc.ibps.persist</groupId>
+			<artifactId>ibps-persist-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.smslib</groupId>
+			<artifactId>sms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.smslib</groupId>
+			<artifactId>RXTXcomm</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>taobao</groupId>
+		  <artifactId>taobao-sdk-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+		  	<artifactId>aliyun-java-sdk-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

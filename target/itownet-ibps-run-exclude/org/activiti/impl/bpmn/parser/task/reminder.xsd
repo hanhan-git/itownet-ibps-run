@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/task/reminder"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+	targetNamespace="http://www.lc.com/bpm/plugins/task/reminder" elementFormDefault="qualified">
+    	
+	<xs:element name="taskReminder" >
+		<xs:annotation>
+			<xs:documentation>催办任务插件</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="item" type="taskReminderType" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="taskReminderType">
+        <xs:sequence>
+        	
+            <xs:element name="conExpression" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>条件表达式</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            
+            <xs:element name="remind" type="remindDef">
+            	<xs:annotation>
+            		<xs:documentation>催办提醒</xs:documentation>
+            	</xs:annotation>
+            </xs:element>
+            
+        </xs:sequence>
+         
+        <xs:attribute name="dueAction" type="taskDueAction"  default="no-action">
+        	<xs:annotation>
+                    <xs:documentation>任务到期执行的操作类型</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        
+        <xs:attribute name="name" type="xs:string" use="required">
+        	<xs:annotation>
+        		<xs:documentation>催办名称</xs:documentation>
+        	</xs:annotation>
+        </xs:attribute>
+        
+        <xs:attribute name="currentNode" type="xs:string" use="required">
+        	<xs:annotation>
+        		<xs:documentation>当前节点</xs:documentation>
+        	</xs:annotation>
+        </xs:attribute>
+        
+        <xs:attribute name="relNodeId" use="required">
+                <xs:annotation>
+                    <xs:documentation>相对节点ID</xs:documentation>
+                </xs:annotation>
+        </xs:attribute>
+        
+        <xs:attribute name="relNodeEvent" type="nodeEvent" use="required">
+            	<xs:annotation>
+            		<xs:documentation>相对处理事件</xs:documentation>
+            	</xs:annotation>
+        </xs:attribute>
+        
+        
+        <xs:attribute name="dueTime" type="xs:string" use="required">
+            	<xs:annotation>
+            		<xs:documentation>到期时间</xs:documentation>
+            	</xs:annotation>
+        </xs:attribute>
+        
+        <xs:attribute name="relTimeType" type="timeType" use="required">
+            	<xs:annotation>
+            		<xs:documentation>相对时间类型</xs:documentation>
+            	</xs:annotation>
+        </xs:attribute>
+        
+        
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="remindDef">
+    	<xs:annotation>
+    		<xs:documentation>催办定义</xs:documentation>
+    	</xs:annotation>
+    	<xs:sequence>
+    		<xs:element name="plainText"  minOccurs="1" maxOccurs="1">
+    			<xs:annotation>
+    				<xs:documentation>纯文本消息</xs:documentation>
+    			</xs:annotation>
+    			<xs:complexType mixed="true" >
+    				<xs:attribute name="msgType" type="xs:string"></xs:attribute>
+    			</xs:complexType>
+    		</xs:element>
+    		<xs:element name="html"  minOccurs="1" maxOccurs="1">
+    			<xs:annotation>
+    				<xs:documentation>富文本消息</xs:documentation>
+    			</xs:annotation>
+    			<xs:complexType mixed="true" >
+    				<xs:attribute name="msgType" type="xs:string"></xs:attribute>
+    			</xs:complexType>
+    		</xs:element>
+    	</xs:sequence>
+    	<xs:attribute name="startTime" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>开始催办时间</xs:documentation>
+    		</xs:annotation>
+    	</xs:attribute>
+    	<xs:attribute name="interval" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>发送时间间隔</xs:documentation>
+    		</xs:annotation>
+    	</xs:attribute>
+    	<xs:attribute name="sendTimes" type="xs:int">
+    		<xs:annotation>
+    			<xs:documentation>发送次数</xs:documentation>
+    		</xs:annotation>
+    	</xs:attribute>
+    	<xs:attribute name="msgType" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>消息类型,使用逗号分割</xs:documentation>
+    		</xs:annotation>
+    	</xs:attribute>
+    	
+    </xs:complexType>
+    
+    
+    <xs:simpleType name="nodeEvent">
+    	<xs:annotation>
+    		<xs:documentation>节点事件</xs:documentation>
+    	</xs:annotation>
+    	 <xs:restriction base="xs:string">
+            <xs:enumeration value="create"/>
+            <xs:enumeration value="complete"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="timeType">
+        <xs:annotation>
+            <xs:documentation>相对时间类型 worktime=工作日,caltime=日历日</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="worktime"/>
+            <xs:enumeration value="caltime"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="taskDueAction">
+        <xs:annotation>
+            <xs:documentation>任务到期执行的动作类型</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="no-action"/>
+            <xs:enumeration value="auto-next"/>
+            <xs:enumeration value="end-process"/>
+            <xs:enumeration value="call-method"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>    

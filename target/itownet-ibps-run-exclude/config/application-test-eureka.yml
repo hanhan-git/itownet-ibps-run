@@ -1,0 +1,22 @@
+eureka:
+  environment: ${spring.profiles.active}
+  datacenter: ibps
+  instance:
+    lease-renewal-interval-in-seconds: 15
+    lease-expiration-duration-in-seconds: 45
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+#    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+#    status-page-url: http://192.168.3.230:15100/swagger-ui.html?urls.primaryName=${spring.application.name}
+    metadata-map:
+      zone: zone-gz
+  client:
+    registry-fetch-interval-seconds: 30
+    lease-renewal-interval-in-seconds: 15
+    lease-expiration-duration-in-seconds: 45
+    prefer-same-zone-eureka: true
+    region: ibps
+    availability-zones:
+      ibps: zone-gz
+    service-url:
+      zone-gz: ${EUREKA_CLIENT_SERVICE_URL_ZONE_GZ:http://192.168.3.230:15000/eureka/}

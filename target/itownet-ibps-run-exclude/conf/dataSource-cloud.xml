@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSources>
+  <dataSource>
+    <name>def</name>
+    <alias>dataSource_default</alias>
+
+    <!-- cloud下使用该链接 -->
+ 	<dbType>mysql</dbType>
+  	<driver>com.mysql.jdbc.Driver</driver>
+	<driverUrl>jdbc:mysql://127.0.0.1:3306/ibps__test_v3.1?useUnicode=true&amp;characterEncoding=utf-8</driverUrl>
+    <user></user>
+    <password></password>
+    
+    <status>actived</status>
+    <isDefault>true</isDefault>
+    <variables>
+      <testOnBorrow>false</testOnBorrow>
+      <testWhileIdle>true</testWhileIdle>
+      <validationQuery>SELECT 1 FROM ACT_GE_PROPERTY</validationQuery>
+      <maxPoolPreparedStatementPerConnectionSize>20</maxPoolPreparedStatementPerConnectionSize>
+      <removeAbandonedTimeout>1800</removeAbandonedTimeout>
+      <testOnReturn>false</testOnReturn>
+      <minIdle>20</minIdle>
+      <initialSize>20</initialSize>
+      <maxActive>200</maxActive>
+      <logAbandoned>true</logAbandoned>
+      <poolPreparedStatements>true</poolPreparedStatements>
+      <maxWait>3600000</maxWait>
+      <removeAbandoned>true</removeAbandoned>
+      <timeBetweenEvictionRunsMillis>3600000</timeBetweenEvictionRunsMillis>
+      <minEvictableIdleTimeMillis>300000</minEvictableIdleTimeMillis>
+      <filters>stat</filters>
+    </variables>
+  </dataSource>
+</dataSources>

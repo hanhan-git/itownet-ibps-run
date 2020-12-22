@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean id="defXmlTransForm" class="com.lc.ibps.bpmn.core.engine.def.DefXmlTransForm">
+		<property name="xmlUpdateList" ref="xmlUpdateList"></property>
+	</bean>
+	
+	 <bean id="xmlUpdateList" class="java.util.ArrayList">
+  		<constructor-arg>
+   			<list>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.BoDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.GlobalFormDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.InstFormDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.NodeDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.PluginsDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.PropertiesDefXmlUpdate"></bean>
+    			<bean class="com.lc.ibps.bpmn.core.engine.def.impl.update.VarDefXmlUpdate"></bean>
+   			</list>
+  		</constructor-arg>
+ 	</bean>
+</beans>

@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    zookeeper:
+      connect-string: ${SPRING_CLOUD_ZOOKEEPER_CONNECT_STRING:127.0.0.1:2181}
+      discovery:
+        root: ${SPRING_CLOUD_ZOOKEEPER_DISCOVERY_ROOT:/ibps}
+        instanceHost: ${spring.cloud.client.ip-address}
+        instancePort: ${server.port}

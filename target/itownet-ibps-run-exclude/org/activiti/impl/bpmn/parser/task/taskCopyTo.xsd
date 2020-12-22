@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/task/taskCopyTo"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"	
+	targetNamespace="http://www.lc.com/bpm/plugins/task/taskCopyTo" elementFormDefault="qualified">
+	<xs:import id="base" namespace="http://www.lc.com/bpm/plugins/userCalc/base"  schemaLocation="../usercalc/base.xsd"/>
+    <xs:element name="taskCopyTo">
+        <xs:annotation>
+            <xs:documentation>抄送插件</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>		        
+        	<xs:sequence>
+        		<xs:element ref="copyTo" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+        	</xs:sequence>	                                     
+        </xs:complexType>        
+    </xs:element>
+   
+	<xs:element name="copyTo">		
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="base:userRule" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+			</xs:sequence>			
+			<xs:attribute name="msgTypes">
+				<xs:annotation>
+					<xs:documentation>留空表示无需发消息。消息类型：sms=短信；inner=站内消息；email=邮件。多个消息类型之间用逗号分隔</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>		
+		</xs:complexType>	
+	</xs:element>			
+</xs:schema>    

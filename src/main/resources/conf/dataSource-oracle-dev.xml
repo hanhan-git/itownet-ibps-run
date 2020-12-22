@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSources>
+  <dataSource>
+    <name>def</name>
+    <alias>dataSource_default</alias>
+
+ 	<!-- dev下使用该链接 -->
+ 	<dbType>oracle</dbType>
+    <driver>oracle.jdbc.OracleDriver</driver>
+	<driverUrl>jdbc:oracle:thin:@192.168.1.191:1521:orcl</driverUrl>
+    <user>ibps</user>
+    <password>ibps</password>
+    
+    <status>actived</status>
+    <isDefault>true</isDefault>
+    <variables>
+      <testOnBorrow>false</testOnBorrow>
+      <testWhileIdle>true</testWhileIdle>
+      <validationQuery>SELECT count(1) FROM ACT_GE_PROPERTY</validationQuery>
+      <maxPoolPreparedStatementPerConnectionSize>20</maxPoolPreparedStatementPerConnectionSize>
+      <removeAbandonedTimeout>1800</removeAbandonedTimeout>
+      <testOnReturn>false</testOnReturn>
+      <minIdle>20</minIdle>
+      <initialSize>20</initialSize>
+      <maxActive>200</maxActive>
+      <logAbandoned>true</logAbandoned>
+      <poolPreparedStatements>true</poolPreparedStatements>
+      <maxWait>3600000</maxWait>
+      <removeAbandoned>true</removeAbandoned>
+      <timeBetweenEvictionRunsMillis>3600000</timeBetweenEvictionRunsMillis>
+      <minEvictableIdleTimeMillis>300000</minEvictableIdleTimeMillis>
+      <filters>stat</filters>
+    </variables>
+  </dataSource>
+</dataSources>

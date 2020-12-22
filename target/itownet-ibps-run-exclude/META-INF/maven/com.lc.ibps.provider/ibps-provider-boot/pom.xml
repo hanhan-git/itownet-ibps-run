@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<parent>
+		<groupId>com.lc.ibps.provider</groupId>
+		<artifactId>ibps-provider-root</artifactId>
+		<version>3.3.3-LC.RELEASE</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ibps-provider-boot</artifactId>
+
+	<properties>
+		<jboss-logging.version>3.3.0.Final</jboss-logging.version>
+		
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<maven.build.timestamp.format>yyyyMMdd-HHmmss</maven.build.timestamp.format>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hibernate.validator</groupId>
+					<artifactId>hibernate-validator</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 
+		<dependency> 
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-jetty</artifactId> 
+		</dependency> 
+		<dependency> 
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-tomcat</artifactId> 
+		</dependency> 
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>${jboss-logging.version}</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-config</artifactId>
+		</dependency>
+        <dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-monitor</artifactId>
+		</dependency>
+        <dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-validator</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-swagger</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-basic-response</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-oauth-client-local</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>net.oschina.j2cache</groupId>
+		    		<artifactId>j2cache-mybatis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>	
+		<dependency>
+			<groupId>com.lc.ibps.base</groupId>
+			<artifactId>ibps-base-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.lc.ibps.message</groupId>
+			<artifactId>ibps-message-producer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.excessive</groupId>
+			<artifactId>ibps-excessive-platform</artifactId>
+		</dependency>
+		<!-- 骨架 -->
+		<dependency>
+				<groupId>com.lc.ibps.skeleton</groupId>
+				<artifactId>ibps-provider-skeleton</artifactId>
+		</dependency>
+		<!-- oauth2server -->
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-oauth-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.cloud</groupId>
+			<artifactId>ibps-oauth-server2-default</artifactId>
+		</dependency>
+		
+		<!-- platform -->
+		<dependency>
+			<groupId>com.lc.ibps.provider</groupId>
+			<artifactId>ibps-provider-platform-default</artifactId>
+		</dependency>
+		
+		<!-- business -->
+		<dependency>
+			<groupId>com.lc.ibps.provider</groupId>
+			<artifactId>ibps-provider-form</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lc.ibps.provider</groupId>
+			<artifactId>ibps-provider-bpmn</artifactId>		
+		</dependency>
+		
+		<dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo-shaded</artifactId>
+        </dependency>
+		
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.morph/morph -->
+		<dependency>
+			<groupId>net.sf.morph</groupId>
+			<artifactId>morph</artifactId>
+		</dependency>
+		
+		<dependency>
+		     <groupId>com.alibaba</groupId>
+		     <artifactId>druid</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>dm.jdbc</groupId>
+		  <artifactId>DmJdbcDriver</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>mssql-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>oracledriver</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>fakepath</groupId>
+		  <artifactId>postgresql</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-war-plugin</artifactId>
+			    <version>3.2.0</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<fork>true</fork>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-dependency-plugin</artifactId>
+	            <configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+	            <executions>
+	                <execution>
+	                    <id>copy-dependencies</id>
+	                    <phase>prepare-package</phase>
+	                    <goals>
+	                        <goal>copy-dependencies</goal>
+	                    </goals>
+	                    <configuration>
+	                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+	                        <overWriteReleases>false</overWriteReleases>
+	                        <overWriteSnapshots>false</overWriteSnapshots>
+	                        <overWriteIfNewer>true</overWriteIfNewer>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+			<plugin>
+			    <artifactId>maven-antrun-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <phase>package</phase>
+			            <goals>
+			                <goal>run</goal>
+			            </goals>
+			            <configuration>
+			                <tasks>
+			                	<property name="classes.dir" value="${project.build.directory}/classes-exclude"/>
+								<property name="lib.dir" value="${project.build.directory}/lib-exclude"/>
+								
+								<copy todir="${classes.dir}" includeEmptyDirs="false">
+						        	<fileset dir="${project.build.directory}/classes">
+						        	</fileset>
+						        </copy>
+						        <copy todir="${lib.dir}">
+						        	<fileset dir="${project.build.directory}/lib"/>
+						        </copy>
+								
+								<unjar dest="${classes.dir}" overwrite="false">
+				                	<patternset>
+				                		<include name="**/appd"/>
+				                		<include name="**/*.sh"/>
+				                		<include name="**/*.bat"/>
+				                		<include name="**/readMe"/>
+				                		
+				                		<include name="**/*.xsd"/>
+				                		<include name="**/*.xml"/>
+				                		<include name="**/provider"/>
+				                		<include name="**/*.sql"/>
+				                		<include name="**/*.ftl"/>
+				                		<include name="**/*.yml"/>
+				                		<include name="**/*.txt"/>
+				                		<include name="**/*.conf"/>
+				                		<include name="**/*.properties"/>
+				                		<include name="**/*.setting"/>
+				                		<include name="**/*.env"/>
+				                		
+				                		<exclude name="**/*.map.xml"/>
+				                		<exclude name="org/activiti/db/mapping/**/*.xml"/>
+								    </patternset>
+								    <fileset dir="${lib.dir}">
+								        <include name="lc-*.jar"/>
+								        <include name="ibps-*.jar"/>
+								    </fileset>
+			                	</unjar>
+						        
+						        <!--
+						        <delete includeEmptyDirs="true">
+								  	<fileset dir="${lib.dir}">
+								        <include name="lc-*.jar"/>
+								        <include name="ibps-*.jar"/>
+								  	</fileset>
+								</delete>
+						        -->
+								
+								<property name="jarname" value="boot.jar"/>
+								<property name="jarfile.exclude.basedir" value="${project.build.directory}/${project.artifactId}-exclude"/>
+								<property name="jarfile.exclude.name" value="${jarfile.exclude.basedir}/${jarname}"/>
+								
+						        <copy todir="${jarfile.exclude.basedir}" includeEmptyDirs="false">
+						        	<fileset dir="${classes.dir}">
+						        		<exclude name="**/*.class" />
+						        	</fileset>
+						        </copy>
+						        <copy todir="${jarfile.exclude.basedir}/lib">
+						        	<fileset dir="${lib.dir}"/>
+						        </copy>
+						        <pathconvert property="exclude.lib" pathsep=" ">
+									<mapper>
+										<chainedmapper>
+											<flattenmapper />
+											<globmapper from="*" to="lib/*" />
+										</chainedmapper>
+									</mapper>
+									<fileset dir="${jarfile.exclude.basedir}/lib">
+										<include name="*.jar" />
+									</fileset>
+								</pathconvert>
+								<jar destfile="${jarfile.exclude.name}">
+									<manifest>
+								      	<attribute name="Class-Path" value=". ${exclude.lib}"/>
+								      	<attribute name="Main-Class" value="com.lc.ibps.BootApplication"/>
+								    </manifest>
+							        <fileset dir="${classes.dir}">
+							        	<include name="**/*.class" />
+							        </fileset>
+								</jar>
+								
+								<delete includeEmptyDirs="true">
+								  	<fileset dir="${classes.dir}"/>
+								  	<fileset dir="${lib.dir}"/>
+								  	<fileset dir="${project.build.directory}/lib"/>
+								</delete>
+			                </tasks>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

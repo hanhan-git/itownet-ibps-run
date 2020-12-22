@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd" default-lazy-init="true">
+	
+	<context:component-scan base-package="com.lc.ibps.bpmn.activiti.**.impl" >
+		<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional" />
+	</context:component-scan>	
+	
+	<!-- 流程引擎配置 -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" /> 
+		<property name="databaseType" value="${db.dbType}" />
+		<property name="dbIdentityUsed" value="${bpmx.engine.dbIdentityUsed}" /> 
+		<property name="dbHistoryUsed" value="${bpmx.engine.dbHistoryUsed}" /> 
+		<property name="databaseSchemaUpdate" value="${bpmx.engine.databaseSchemaUpdate}" />
+		
+		<property name="history" value="${bpmx.engine.history}" />
+		<property name="enableProcessDefinitionInfoCache" value="true"/>
+		<property name="processDefinitionCache" ref="activitiDefCache"/>
+		<property name="processDefinitionCacheLimit" value="1000"/>
+		
+		<!-- job executor configurations -->
+		<property name="jobExecutorActivate" value="${bpmx.engine.jobExecutorActivate}" />
+	    <property name="defaultFailedJobWaitTime" value="1" /><!-- seconds -->
+	    <property name="asyncExecutorEnabled" value="${bpmx.engine.asyncExecutorEnabled}" />
+	    <property name="asyncExecutorActivate" value="${bpmx.engine.asyncExecutorActivate}" />
+	    <!-- <property name="asyncExecutor" ref="asyncExecutor" /> -->
+    	<property name="asyncFailedJobWaitTime" value="1" /><!-- seconds -->
+	    
+		<property name="idGenerator" ref="activitiIdGenerator" />
+		
+		<property name="labelFontName" value="宋体"></property>
+		<property name="activityFontName" value="宋体"></property>
+		<property name="annotationFontName" value="宋体"></property>
+	</bean>
+	
+	<!--
+	<bean id="asyncExecutor" class="org.activiti.engine.impl.asyncexecutor.DefaultAsyncJobExecutor">
+	    <property name="defaultAsyncJobAcquireWaitTimeInMillis" value="1000" />
+	    <property name="defaultTimerJobAcquireWaitTimeInMillis" value="1000" />
+    </bean>
+	-->
+    
+    <!-- Activiti流程定义缓存配置 -->
+	<bean id="activitiDefCache" class="com.lc.ibps.bpmn.activiti.cache.ActDefCache"/>
+	
+	<bean id="activitiIdGenerator" class="com.lc.ibps.bpmn.activiti.id.ActivitiIdGenerator">
+		<property name="idGenerator" ref="idGenerator"/>
+	</bean>
+
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean" depends-on="databaseInitializable,appUtil">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration" />
+	</bean>
+
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
+	<!--流程图生成服务类-->
+	<bean id="flowImageService" class="com.lc.ibps.bpmn.activiti.def.graph.FlowImageService"/>
+	
+</beans>

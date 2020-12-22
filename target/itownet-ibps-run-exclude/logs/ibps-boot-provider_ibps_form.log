@@ -1,0 +1,7 @@
+2020-12-21T08:49:10,657   ibps-boot-provider   ibps.form                       DEBUG com.lc.ibps.components.codegen.bootstrap.TemplateInitialzation.<init>(TemplateInitialzation.java:21) : TemplateInitialzation init...
+2020-12-21T08:49:20,454   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : ==>  Preparing: SELECT COUNT(0) FROM IBPS_CODE_TEMPLATE 
+2020-12-21T08:49:20,454   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : ==> Parameters: 
+2020-12-21T08:49:20,468   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : <==      Total: 1
+2020-12-21T08:49:21,250   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : ==>  Preparing: SELECT COUNT(0) FROM IBPS_CODE_TEMPLATE 
+2020-12-21T08:49:21,250   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : ==> Parameters: 
+2020-12-21T08:49:21,250   ibps-boot-provider   ibps.form                       DEBUG org.apache.ibatis.logging.jdbc.BaseJdbcLogger.debug(BaseJdbcLogger.java:159) : <==      Total: 1

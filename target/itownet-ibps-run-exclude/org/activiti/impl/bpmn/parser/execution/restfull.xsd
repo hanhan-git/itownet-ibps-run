@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/execution/restfull"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+    targetNamespace="http://www.lc.com/bpm/plugins/execution/restfull" elementFormDefault="qualified">
+    <xs:element name="restfull" >
+        <xs:annotation>
+            <xs:documentation>restfull插件</xs:documentation>
+        </xs:annotation> 
+        <xs:complexType>
+        	<xs:choice minOccurs="1" maxOccurs="2">
+        		<xs:element name="input" type="xs:string" >
+        		</xs:element>
+        		<xs:element name="output" type="xs:string">
+        		</xs:element>
+        	</xs:choice>
+        	<xs:attribute name="url" type="xs:string"></xs:attribute>
+        	<xs:attribute name="method" type="xs:string"></xs:attribute>
+        	<xs:attribute name="ignoreException" type="xs:string"></xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

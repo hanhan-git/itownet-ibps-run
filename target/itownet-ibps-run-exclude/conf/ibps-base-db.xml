@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byType">
+       
+	<context:annotation-config />
+	<!-- ID生成器 -->
+	<!-- <bean id="idGenerator" class="com.lc.ibps.base.db.id.DefaultIdGenerator" depends-on="appUtil"/> -->
+	
+	<!--唯一ID获取类 -->	
+	<!-- <bean id="uniqueIdUtil" class="com.lc.ibps.base.framework.id.UniqueIdUtil">
+		<property name="idGenerator" ref="idGenerator"></property>
+	</bean> -->
+	
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+
+	<!-- <bean id="sqlSessionFactory" class="com.lc.ibps.base.db.mybatis.spring.MybatisSqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/conf/ibps-base-db-config.xml"/>
+		<property name="mappingAllLocation" value="classpath*:conf/ibps-mapping-all.xml"/>
+	</bean> -->
+
+	<!-- <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean> -->
+	
+	<!-- 数据库自动建库操作类 -->
+	<!-- <bean id="databaseInitializable" class="com.lc.ibps.base.db.bootstrap.DatabaseInitializable" init-method="initialize"></bean> -->
+	
+	<!-- 数据库通用操作类 -->
+	<!-- <bean id="commonDao" class="com.lc.ibps.base.db.mybatis.CommonDao"></bean> -->
+	
+	<!-- 方言 -->
+	<!-- <bean id="dialect" class="com.lc.ibps.base.db.table.factory.DialectFactoryBean">
+		<property name="dbType" value="${db.dbType}"/>
+	</bean> -->
+	
+	<!-- <bean id="tableMeta" class="com.lc.ibps.base.db.table.factory.TableMetaFactoryBean">
+		<property name="dbType" value="${db.dbType}"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="commonDao" ref="commonDao"/>
+	</bean> -->
+	
+	<!-- 索引操作类  -->
+	<!-- <bean id="indexOperator" class="com.lc.ibps.base.db.table.factory.IndexOperatorFactoryBean">
+		<property name="dbType" value="${db.dbType}"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="commonDao" ref="commonDao"/>
+		<property name="dialect" ref="dialect"></property>
+	</bean> -->
+	
+	<!-- 表创建器 -->
+	<!-- <bean id="tableOperator" class="com.lc.ibps.base.db.table.factory.TableOperatorFactoryBean">
+		<property name="dbType" value="${db.dbType}"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+		<property name="commonDao" ref="commonDao"/>
+		<property name="indexOperator" ref="indexOperator"/>
+		<property name="dialect" ref="dialect"></property>
+	</bean> -->
+</beans>

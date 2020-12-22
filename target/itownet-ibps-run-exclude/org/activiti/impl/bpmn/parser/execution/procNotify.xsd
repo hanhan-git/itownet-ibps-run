@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/execution/procNotify"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+	xmlns:baseNotify="http://www.lc.com/bpm/plugins/task/baseNotify"
+	targetNamespace="http://www.lc.com/bpm/plugins/execution/procNotify" elementFormDefault="qualified">
+	<xs:import id="base" namespace="http://www.lc.com/bpm/plugins/userCalc/base"  schemaLocation="../usercalc/base.xsd"/>
+	<xs:import id="baseNotify" namespace="http://www.lc.com/bpm/plugins/task/baseNotify"  schemaLocation="../task/baseNotify.xsd"/>
+	<xs:element name="procNotify">
+		<xs:annotation>
+			<xs:documentation>通知插件</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>		        
+			<xs:sequence>                 	
+				<xs:element ref="onEnd" minOccurs="1" maxOccurs="1" ></xs:element>
+			</xs:sequence>                                       
+		</xs:complexType>        
+	</xs:element>
+	
+	<xs:element name="onEnd">
+		<xs:complexType>		        
+			<xs:sequence>
+				<xs:element ref="baseNotify:notify" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+			</xs:sequence>				
+		</xs:complexType>	
+	</xs:element>		
+</xs:schema>    

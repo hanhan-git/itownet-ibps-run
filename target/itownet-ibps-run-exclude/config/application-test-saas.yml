@@ -1,0 +1,7 @@
+db:
+  tenant:
+    enabled: ${TENANT_ENABLED:false}
+    ignore:
+      enabled: true 
+    user:
+      class: com.lc.ibps.saas.spi.TenantSpiUserService

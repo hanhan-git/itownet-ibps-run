@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="codegen.xsd">
+	<templates>
+		<!-- 公用文件 -->
+		<template key="function"  path="function.ftl"/>
+		<template key="variable"  path="variable.ftl"/>
+		
+		<!--单元测试相关类 -->
+		<template key="baseTest"  path="test/baseTest.ftl"/>
+		<template key="daoTest"  path="test/daoTest.ftl"/>
+		<template key="domainTest"  path="test/domainTest.ftl"/>
+						
+		<!-- 持久层 persistence -->
+		<template key="mapping"  path="mapping/mapping.ftl"/>
+		<template key="tbl" path="entity/tbl.ftl"/>
+		<template key="po" path="entity/po.ftl"/>	
+			
+		<template key="dao" path="dao/dao.ftl"/>
+		<template key="daoImpl" path="dao/impl/daoImpl.ftl"/>
+		<template key="queryDao" path="dao/queryDao.ftl"/>
+		<template key="queryDaoImpl" path="dao/impl/queryDaoImpl.ftl"/>		
+
+		<!-- 领域层 domain -->
+		<template key="domain"  path="domain/domain.ftl"/>		
+		<template key="repository"  path="repository/repository.ftl"/>
+		<template key="repositoryImpl"  path="repository/impl/repositoryImpl.ftl"/>
+		
+		<!-- 接口层 api -->
+		<template key="api"  path="api/service.ftl"/>
+		
+		<!-- 接口层 client -->
+		<template key="client"  path="api/client.ftl"/>
+		
+		<!-- 服务层 provider -->
+		<template key="provider"  path="provider/provider.ftl"/>
+
+		<!--页面 -->
+		<template key="list"  path="view/list.ftl"/>
+		<template key="edit"  path="view/edit.ftl"/>
+		<template key="web"  path="view/request.ftl"/>
+		<template key="tree"  path="view/tree.ftl"/>
+		<template key="treeEdit"  path="view/treeEdit.ftl"/>
+		
+		<!-- 表单渲染 -->
+		<!-- 未完成，暂时注释
+		<template key="formEdit"  path="form/edit.ftl"/>
+		<template key="formGet"  path="form/get.ftl"/>
+		 -->
+	</templates>
+
+	<!-- 
+	maven
+		|-src
+			|-main
+				|-java
+				|-resources
+				|-webapp
+			|-test
+				|-java
+				|-resources
+	-->
+	<files isDefault="true">
+		<file refTemplate="function" filename="-" dir="-" sub="true"  notDelete="true"/>						
+		<file refTemplate="variable" filename="-" dir="-" sub="false"  notDelete="true"/>						
+		
+		<file refTemplate="baseTest" filename="{baseClass}BaseTest.java" dir="src/test/java/com/{cAlias}/{cPlatform}/{sys}" sub="false"  notDelete="true"/>						
+		<!-- sub table setting -->	
+		<file refTemplate="mapping" filename="{class}.map.xml" dir="src/main/resources/com/{cAlias}/{cPlatform}/{module}/persistence/mapping"  sub="true"  override="true"/>											
+		<file refTemplate="tbl" filename="{class}Tbl.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<file refTemplate="po" filename="{class}Po.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<!-- sub table setting -->	
+		<file refTemplate="dao" filename="{class}Dao.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="daoImpl" filename="{class}DaoImpl.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="queryDao" filename="{class}QueryDao.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="queryDaoImpl" filename="{class}QueryDaoImpl.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="daoTest" filename="{class}DaoTest.java" dir="src/test/java/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="domain" filename="{class}.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true" override="true"/>			
+		<file refTemplate="domainTest" filename="{class}Test.java" dir="src/test/java/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true"  override="true"/>
+		<file refTemplate="repository" filename="{class}Repository.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/repository" sub="true"   override="true"/>					
+		<file refTemplate="repositoryImpl" filename="{class}RepositoryImpl.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/repository/impl" sub="true"   override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="api" filename="I{class}Service.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/api" sub="true"   override="true"/>					
+		<file refTemplate="client" filename="I{class}ServiceClient.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/client" sub="true"   override="true"/>					
+		<!-- main table setting -->																					
+		<file refTemplate="provider" filename="{class}Provider.java" dir="src/main/java/com/{cAlias}/{cPlatform}/{sys}/{module}/provider" sub="false"  override="true"/>
+		<!-- main table setting -->																		
+		<file refTemplate="web" filename="{classVar}.js" dir="src/api/{sys}/{module}" sub="false"  override="true"/>
+		<file refTemplate="list" filename="list.vue" dir="src/views/{sys}/{module}/{classVar}" sub="false"  override="true"/>
+		<file refTemplate="edit" filename="edit.vue" dir="src/views/{sys}/{module}/{classVar}" sub="false"  override="true"/>
+		<file refTemplate="tree" filename="manage.vue" dir="src/views/{sys}/{module}/{classVar}" sub="false"  override="true"/>
+		<file refTemplate="treeEdit" filename="tree-edit.vue" dir="src/views/{sys}/{module}/{classVar}" sub="false"  override="true"/>
+		
+		<!-- 
+		<file refTemplate="formEdit" filename="{classVar}FormEdit.jsp" dir="src/main/webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="formGet" filename="{classVar}FormGet.jsp" dir="src/main/webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		 -->
+	</files>
+	
+	<!-- 
+	javaWeb
+		|-src
+		|-resources
+		|-web
+	-->
+	<files isDefault="false">
+		<file refTemplate="function" filename="-" dir="-" sub="true"  notDelete="true"/>						
+		<file refTemplate="variable" filename="-" dir="-" sub="false"  notDelete="true"/>						
+		
+		<file refTemplate="baseTest" filename="{baseClass}BaseTest.java" dir="src/com/{cAlias}/{cPlatform}/{sys}" sub="false"  notDelete="true"/>						
+		<!-- sub table setting -->	
+		<file refTemplate="mapping" filename="{class}.map.xml" dir="resources/com/{cAlias}/{cPlatform}/{module}/persistence/mapping"  sub="true"  override="true"/>											
+		<file refTemplate="tbl" filename="{class}Tbl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<file refTemplate="po" filename="{class}Po.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<!-- sub table setting -->	
+		<file refTemplate="dao" filename="{class}Dao.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="daoImpl" filename="{class}DaoImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="queryDao" filename="{class}QueryDao.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="queryDaoImpl" filename="{class}QueryDaoImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="daoTest" filename="{class}DaoTest.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="domain" filename="{class}.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true" override="true"/>			
+		<file refTemplate="domainTest" filename="{class}Test.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true"  override="true"/>
+		<file refTemplate="repository" filename="{class}Repository.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/repository" sub="true"   override="true"/>					
+		<file refTemplate="repositoryImpl" filename="{class}RepositoryImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/repository/impl" sub="true"   override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="api" filename="I{class}Service.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/api" sub="true"   override="true"/>					
+		<file refTemplate="client" filename="I{class}ServiceClient.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/client" sub="true"   override="true"/>					
+		<!-- main table setting -->																					
+		<file refTemplate="provider" filename="{class}Provider.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/provider" sub="false"  override="true"/>
+		<!-- main table setting -->																		
+		<!-- 
+		<file refTemplate="tree" filename="{classVar}Tree.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="list" filename="{classVar}List.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="edit" filename="{classVar}Edit.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="flowEdit" filename="{classVar}FlowEdit.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="get" filename="{classVar}Get.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="web" filename="{classVar}.js" dir="web/js/{cAlias}/{app}/{module}" sub="false"  override="true"/>
+		
+		<file refTemplate="formEdit" filename="{classVar}FormEdit.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="formGet" filename="{classVar}FormGet.jsp" dir="web/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		 -->
+	</files>
+	
+	<!-- 
+	javaWeb
+		|-src
+		|-resources
+		|-webapp
+	-->
+	<files isDefault="false">
+		<file refTemplate="function" filename="-" dir="-" sub="true"  notDelete="true"/>						
+		<file refTemplate="variable" filename="-" dir="-" sub="false"  notDelete="true"/>						
+		
+		<file refTemplate="baseTest" filename="{baseClass}BaseTest.java" dir="src/com/{cAlias}/{cPlatform}/{sys}" sub="false"  notDelete="true"/>						
+		<!-- sub table setting -->	
+		<file refTemplate="mapping" filename="{class}.map.xml" dir="resources/com/{cAlias}/{cPlatform}/{module}/persistence/mapping"  sub="true"  override="true"/>											
+		<file refTemplate="tbl" filename="{class}Tbl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<file refTemplate="po" filename="{class}Po.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/entity"  sub="true" override="true"/>
+		<!-- sub table setting -->	
+		<file refTemplate="dao" filename="{class}Dao.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="daoImpl" filename="{class}DaoImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="queryDao" filename="{class}QueryDao.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<file refTemplate="queryDaoImpl" filename="{class}QueryDaoImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao/impl" sub="true"  override="true"/>
+		<file refTemplate="daoTest" filename="{class}DaoTest.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/persistence/dao" sub="true"  override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="domain" filename="{class}.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true" override="true"/>			
+		<file refTemplate="domainTest" filename="{class}Test.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/domain"  sub="true"  override="true"/>
+		<file refTemplate="repository" filename="{class}Repository.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/repository" sub="true" override="true"/>					
+		<file refTemplate="repositoryImpl" filename="{class}RepositoryImpl.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/repository/impl" sub="true" override="true"/>
+		<!-- sub table setting -->
+		<file refTemplate="api" filename="I{class}Service.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/api" sub="true"   override="true"/>					
+		<file refTemplate="client" filename="I{class}ServiceClient.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/client" sub="true"   override="true"/>					
+		<!-- main table setting -->																					
+		<file refTemplate="provider" filename="{class}Provider.java" dir="src/com/{cAlias}/{cPlatform}/{sys}/{module}/provider" sub="false"  override="true"/>
+		<!-- main table setting -->																		
+		<!-- 
+		<file refTemplate="tree" filename="{classVar}Tree.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="list" filename="{classVar}List.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="edit" filename="{classVar}Edit.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="flowEdit" filename="{classVar}FlowEdit.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="get" filename="{classVar}Get.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="web" filename="{classVar}.js" dir="webapp/js/{cAlias}/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="formEdit" filename="{classVar}FormEdit.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		<file refTemplate="formGet" filename="{classVar}FormGet.jsp" dir="webapp/WEB-INF/view/{app}/{module}" sub="false"  override="true"/>
+		 -->
+	</files>
+</config>

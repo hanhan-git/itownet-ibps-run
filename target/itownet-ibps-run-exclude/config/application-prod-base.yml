@@ -1,0 +1,95 @@
+spring:
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST:192.168.3.240}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    addresses: ${SPRING_RABBITMQ_ADDRESSES:}
+    username: ${SPRING_RABBITMQ_USERNAME:ibpsprod}
+    password: ${SPRING_RABBITMQ_PASSWORD:ibpsprod}
+    virtual-host: ${SPRING_RABBITMQ_VIRTUAL_HOST:/ibpsprod}
+  #============== kafka ===================
+  # 指定kafka 代理地址，可以多个
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:192.168.3.207:9092}
+    #=============== provider =======================
+    producer:
+      retries: ${KAFKA_PRODUCER_RETRIES:0}
+      batch-size: ${KAFKA_PRODUCER_BATCH_SIZE:16384}
+      buffer-memory: ${KAFKA_PRODUCER_BUFFER_MEMORY:33554432}
+      key-serializer: ${KAFKA_PRODUCER_KEY_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}
+      value-serializer: ${KAFKA_PRODUCER_VALUE_SERIALIZER:com.lc.ibps.cloud.mq.core.kafka.serializer.JacksonSerializer}
+      # 以下配置为kafka认证相关，若未开启认证，请注释相关配置
+      properties:
+        # 表明开启 SCRAM 认证机制，并启用 SHA-256 算法
+        sasl.mechanism: ${KAFKA_PRODUCER_PROPERTIES_SASL_MECHANISM:SCRAM-SHA-256}
+        # 表示 Broker 间通信不配置 SSL
+        security.protocol: ${KAFKA_PRODUCER_PROPERTIES_SECURITY_PROTOCOL:SASL_PLAINTEXT}
+        # 认证参数配置
+        sasl.jaas.config: ${KAFKA_PRODUCER_PROPERTIES_SASL_JAAS_CONFIG:org.apache.kafka.common.security.scram.ScramLoginModule required username="admin" password="admin";}
+    #=============== consumer =======================
+    consumer:
+      auto-offset-reset: ${KAFKA_CONSUMER_AUTO_OFFSET_RESET:earliest}
+      enable-auto-commit: ${KAFKA_CONSUMER_ENABLE_AUTO_COMMIT:true}
+      auto-commit-interval: ${KAFKA_CONSUMER_AUTO_COMMIT_INTERVAL:100}
+      key-deserializer: ${KAFKA_CONSUMER_KEY_DESERIALIZER:org.apache.kafka.common.serialization.StringDeserializer}
+      value-deserializer: ${KAFKA_CONSUMER_VALUE_DESERIALIZER:com.lc.ibps.cloud.mq.core.kafka.serializer.JacksonSerializer}
+      # 以下配置为kafka认证相关，若未开启认证，请注释相关配置
+      properties:
+        # 表明开启 SCRAM 认证机制，并启用 SHA-256 算法
+        sasl.mechanism: ${KAFKA_CONSUMER_PROPERTIES_SASL_MECHANISM:SCRAM-SHA-256}
+        # 表示 Broker 间通信不配置 SSL
+        security.protocol: ${KAFKA_CONSUMER_PROPERTIES_SECURITY_PROTOCOL:SASL_PLAINTEXT}
+        # 认证参数配置
+        sasl.jaas.config: ${KAFKA_CONSUMER_PROPERTIES_SASL_JAAS_CONFIG:org.apache.kafka.common.security.scram.ScramLoginModule required username="admin" password="admin";}
+  redis:
+    database: ${SPRING_REDIS_DATABASE:10}
+    host: ${SPRING_REDIS_HOST:192.168.3.240}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:}
+    ssl: ${SPRING_REDIS_SSL:false}
+    timeout: ${SPRING_REDIS_TIMEOUT:3000}
+#    pool:
+#      max-active: ${SPRING_REDIS_POOL_MAX_ACTIVE:100}
+#      max-idle: ${SPRING_REDIS_POOL_MAX_IDLE:10}
+#      min-idle: ${SPRING_REDIS_POOL_MIN_IDLE:10}
+#      max-wait: ${SPRING_REDIS_POOL_MAX_WAIT:3000}    
+    lettuce:
+      pool:
+        max-active: ${SPRING_REDIS_LETTUCE_POOL_MAX_ACTIVE:10}
+        max-idle: ${SPRING_REDIS_LETTUCE_POOL_MAX_IDLE:5}
+        min-idle: ${SPRING_REDIS_LETTUCE_POOL_MIN_IDLE:0}
+        max-wait: ${SPRING_REDIS_LETTUCE_POOL_MAX_WAIT:3000}
+#    cluster:
+#      max-redirects: 3
+#      nodes: 
+#        - 192.168.3.213:6379
+#        - 192.168.3.213:6380
+#        - 192.168.3.214:6379
+#        - 192.168.3.214:6380
+#        - 192.168.3.215:6379
+#        - 192.168.3.215:6380   
+#    sentinel:
+#      master: ibps-master
+#      nodes: 
+#        - 192.168.3.213:6379
+#        - 192.168.3.213:6380
+#        - 192.168.3.214:6379
+#        - 192.168.3.214:6380
+#        - 192.168.3.215:6379
+#        - 192.168.3.215:6380
+  
+endpoints:
+  shutdown:
+    enabled: false
+    sensitive: false
+    
+aop:
+  sigar:
+    open: ${AOP_SIGAR_OPEN:false}
+  jvm:
+    open: ${AOP_JVM_OPEN:true}  
+  stopwatch:
+    open: ${AOP_STOPWATCH_OPEN:true}
+cache:
+  flush:
+    profiles:
+      active: prod

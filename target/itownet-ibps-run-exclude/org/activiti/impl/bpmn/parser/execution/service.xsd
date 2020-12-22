@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.lc.com/bpm/plugins/execution/services"
+	targetNamespace="http://www.lc.com/bpm/plugins/execution/services"
+	elementFormDefault="qualified">
+
+	<xs:element name="service" type="tService"/>
+
+	<xs:complexType name="tService">
+		<xs:annotation>
+			<xs:documentation>服务插件</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="setting" type="tSetting" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ignoreException" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>是否忽略异常，让流程正常向下流转</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="tSetting">
+		<xs:sequence>
+			<xs:element name="bind" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>回调类型为脚本-default时保存数据绑定内容</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="script" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>回调类型为脚本-groovy时保存脚本内容</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="serviceKey" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>服务标识，在服务管理中维护</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="serviceName" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>服务名称，在服务管理中维护</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="callbackType" type="xs:string" default="default">
+			<xs:annotation>
+				<xs:documentation>回调类型，默认-default，脚本-groovy</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+</xs:schema>

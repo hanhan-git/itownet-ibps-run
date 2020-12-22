@@ -1,0 +1,3 @@
+fastdfs:
+  common:
+      tracker-servers: ${FILE_TRACKER_SERVER:172.18.39.119:22122}

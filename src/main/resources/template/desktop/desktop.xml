@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<desktopColumns xmlns="http://www.lc.com/desktop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.lc.com/desktop desktop.xsd">
+	<desktopColumn name="快捷导航" 	alias="quickNavigation"  colType="0" dataMode="0"	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="我的收藏" 	alias="myFavorites" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/query/favorited/new2" colUrl="myFavorites" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="个人信息" 	alias="userInfo" 		 colType="0" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/userInfo" 	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="未读消息" 	alias="unreadMessage" 	 colType="0" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/unreadMessage" 	 colUrl="receiveMessage" isPublic="1" isRefesh="0" showEffect="1"/>
+	
+	<desktopColumn name="转办事务" 	alias="taskChange" 		 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/pending/shift2" colUrl="delegateMatters" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="待办事务" 	alias="pendingBusiness"	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/pending/user2"  colUrl="pendingItems"	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="代理事务" 	alias="delegate"		 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/pending/assignee2"  colUrl="delegateMatters"	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="待办仪表盘" 	alias="paddingApprove" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/find/dashboard/pending" colUtl="pendingAssignee"  isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="流程仪表盘" 	alias="bpmApprove" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/find/dashboard/bpmn"  isPublic="1" isRefesh="0" showEffect="0"/>
+	
+	<desktopColumn name="公告栏目" 	alias="notice" 	 		 colType="0" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/getNews"  		  colUrl="gggl" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="待办事宜" 	alias="pendingMatters" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/pending/matters2"  colUrl="pendingMatters"	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="已办事宜" 	alias="alreadyMatters" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/handled/task2"  colUrl="handledTasks" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="办结事宜" 	alias="completedMatters" colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/handled2" 	 colUrl="completedMatters" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="我的办结" 	alias="myCompleted" 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/received/query/completed2"  colUrl="myCompleted"	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="我的请求" 	alias="myRequest" 		 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/query/my/requested2"  colUrl="myRequest" isPublic="1" isRefesh="0" showEffect="0"/>	
+	<desktopColumn name="新建流程" 	alias="newProcess" 	 	 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/query/process/new2" 	 colUrl="newProcess" isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="环形图"  	alias="pieChart" 		 colType="1" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/demo/pie/chart"  	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="分布图" 	alias="scattergram" 		 colType="1" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/demo/scattergram"   isPublic="1" isRefesh="1" showEffect="0"/>
+	<desktopColumn name="幻灯片例子" 	alias="slide" 		     colType="0" dataMode="0"  colHeight="450" isPublic="1" isRefesh="0" showEffect="2"/>
+	<desktopColumn name="我的日程 "  	alias="myCalendar" 		 colType="2" dataMode="2" dataFrom="{{PLATFORM_BASE_URL}}/desktop/facade/demo/my/calendar"  	isPublic="1" isRefesh="0" showEffect="0"/>
+	<desktopColumn name="仪表盘" 	alias="dashboard" 			 colType="0" dataMode="2" dataFrom="{{BUSINESS_BASE_URL}}/bpm/initiated/find/dashboard" 	isPublic="1" isRefesh="0" showEffect="0"/>
+</desktopColumns>

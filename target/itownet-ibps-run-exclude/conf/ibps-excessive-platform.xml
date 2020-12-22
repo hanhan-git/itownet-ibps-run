@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	<context:component-scan base-package="com.lc.ibps.platform.*.service.impl">
+		<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional" />
+	</context:component-scan>
+	
+	<!-- Groovy脚本：常用脚本 -->
+	<bean id="cscript" class="com.lc.ibps.platform.script.script.CommonScript"/>
+	<bean id="scriptImpl" class="com.lc.ibps.platform.script.script.ScriptImpl"/>
+	<bean id="businessScript" class="com.lc.ibps.platform.script.script.BusinessScript"/>
+	<bean id="bpmnScript" class="com.lc.ibps.platform.script.script.BpmnScript"/>
+	<bean id="jdbcScript" class="com.lc.ibps.platform.script.script.JdbcScript"/>
+	<bean id="validationScript" class="com.lc.ibps.platform.script.script.ValidationScript"/>
+	<bean id="molecularItemScript" class="com.lc.ibps.platform.script.script.MolecularItemScript"/>
+	
+</beans>

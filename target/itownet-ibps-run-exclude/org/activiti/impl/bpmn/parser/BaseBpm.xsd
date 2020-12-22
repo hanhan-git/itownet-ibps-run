@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <xs:schema xmlns="http://www.lc.com/bpm" 
+ 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL"
+    xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+    xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+    xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+    xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn"
+    targetNamespace="http://www.lc.com/bpm" elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <xs:import namespace="http://www.omg.org/spec/BPMN/20100524/MODEL" schemaLocation="BPMN20.xsd"/>
+    <xs:import namespace="http://www.omg.org/spec/DD/20100524/DI" schemaLocation="DI.xsd"/>
+    <xs:import namespace="http://www.omg.org/spec/DD/20100524/DC" schemaLocation="DC.xsd"/>
+    <xs:import namespace="http://activiti.org/bpmn" schemaLocation="activiti-bpmn-extensions-5.11.xsd"/>
+    <xs:include schemaLocation="ibps-bpmn-extensions.xsd"></xs:include>
+
+</xs:schema>

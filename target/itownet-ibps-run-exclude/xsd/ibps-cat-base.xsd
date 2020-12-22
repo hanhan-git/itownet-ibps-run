@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/ibps-cat-base" 
+	targetNamespace="http://www.lc.com/ibps-cat-base" elementFormDefault="qualified">
+	
+	<xs:import namespace="http://www.lc.com/ibps-cat-def" schemaLocation="ibps-cat-def.xsd"/>
+	<xs:import namespace="http://www.lc.com/ibps-type-def" schemaLocation="ibps-type-def.xsd"/>
+	<xs:import namespace="http://www.lc.com/ibps-dic-def" schemaLocation="ibps-dic-def.xsd"/>
+
+</xs:schema>

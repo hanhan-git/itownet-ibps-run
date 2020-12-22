@@ -1,0 +1,5 @@
+spring:
+ profiles:
+  include: prod-base,prod-socket,prod-fileserver
+server:
+  port: 5400

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+		" default-lazy-init="true"> 
+
+	<import resource="ibps-bpmn-activiti.xml"/>	
+	<import resource="ibps-bpmn-plugin-core.xml" />
+    <import resource="ibps-bpmn-plugin.xml" />
+    <import resource="ibps-bpmn-extend.xml" />
+    <import resource="ibps-bpmn-task-handler.xml" />
+    <import resource="ibps-bpmn-bean.xml" />
+    <!--     
+    <import resource="ibps-bpmn-def.xml" />-->
+ 	
+<!-- 	listener
+										,com.lc.ibps.bpmn.core.engine
+										,com.lc.ibps.bpmn.core.helper.identity
+										,com.lc.ibps.bpmn.domain
+										,com.lc.ibps.bpmn.**.impl -->
+										
+	<context:component-scan base-package="com.lc.ibps.bpmn.*" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+		<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional" />
+	</context:component-scan>
+   
+   	<bean id="defaultBpmIdentity" class="com.lc.ibps.bpmn.model.DefaultBpmIdentity"/>
+   
+</beans>

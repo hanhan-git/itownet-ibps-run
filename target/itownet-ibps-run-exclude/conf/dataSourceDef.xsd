@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:base="http://www.lc.com/base/db/dataSourceDef"
+	targetNamespace="http://www.lc.com/base/db/dataSourceDef"
+	xmlns:tns="http://www.example.org/base" elementFormDefault="qualified">
+
+    <xsd:element name="dataSourceDefs" type="dataSourceDefsType" maxOccurs="1" minOccurs="1"/>
+    
+    <xsd:complexType name="dataSourceDefsType">
+        <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+            <xsd:element name="dataSourceDef" type="dataSourceDefType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="dataSourceDefType">
+        <xsd:sequence maxOccurs="1" minOccurs="1">
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="alias" type="xsd:string" />
+            <xsd:element name="classPath" type="xsd:string"/>
+            <xsd:element name="variables" />
+        </xsd:sequence>
+    </xsd:complexType>
+        
+    
+</xsd:schema>

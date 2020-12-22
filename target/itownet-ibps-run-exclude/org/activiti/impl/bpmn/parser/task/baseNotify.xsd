@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.lc.com/bpm/plugins/task/baseNotify"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+	targetNamespace="http://www.lc.com/bpm/plugins/task/baseNotify" elementFormDefault="qualified">
+    <xs:import id="base" namespace="http://www.lc.com/bpm/plugins/userCalc/base"  schemaLocation="../usercalc/base.xsd"/>	
+	<xs:element name="notify">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element  ref="base:userRule" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+			</xs:sequence>
+			<xs:attribute name="msgTypes"  use="required">
+				<xs:annotation>
+					<xs:documentation>消息类型：sms=短信；inner=站内消息；email=邮件。多个消息类型之间用逗号分隔</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="subTypeKey">
+				<xs:annotation>
+					<xs:documentation>二级模板分类。对于同一类模板，如果需要细分，如按接收人进行分类等，可以设置二级分类。</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>			
+		</xs:complexType>
+	</xs:element>
+</xs:schema>    

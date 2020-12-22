@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.lc.com/bpm/plugins/userCalc/userGrade"
+	targetNamespace="http://www.lc.com/bpm/plugins/userCalc/userGrade"
+	xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base"
+	elementFormDefault="qualified">
+	<xs:import namespace="http://www.lc.com/bpm/plugins/userCalc/base"
+		schemaLocation="base.xsd" />
+	<xs:element name="userGrade">
+		<xs:annotation>
+			<xs:documentation>组织上下级</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="base:abstractLogic">
+					<xs:all maxOccurs="1" minOccurs="0">
+						<xs:element name="settings" maxOccurs="1" minOccurs="1">
+                            <xs:complexType>
+	                            <xs:sequence>
+		                            <xs:element name="setting" minOccurs="1" maxOccurs="unbounded" >
+			                            <xs:complexType>
+			                                <xs:attribute name="grade"  use="required"/>
+			                                <xs:attribute name="gradeid" use="required"/>
+			                                <xs:attribute name="graderel" use="required"/>
+			                                <xs:attribute name="principal" use="required"/>
+			                            </xs:complexType>
+			                        </xs:element>
+		                        </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="nodes" maxOccurs="1" minOccurs="0">
+                            <xs:complexType>
+                                <xs:attribute name="nodeId"  use="required"/>
+                                <xs:attribute name="nodeName" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+					</xs:all>
+
+					<xs:attribute name="source" type="base:userType" use="required">
+						<xs:annotation>
+							<xs:documentation>来源分类</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

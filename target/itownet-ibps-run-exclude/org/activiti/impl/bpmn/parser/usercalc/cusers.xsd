@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.lc.com/bpm/plugins/userCalc/cusers"
+    targetNamespace="http://www.lc.com/bpm/plugins/userCalc/cusers"
+    xmlns:base="http://www.lc.com/bpm/plugins/userCalc/base" elementFormDefault="qualified">
+    
+    <xs:import namespace="http://www.lc.com/bpm/plugins/userCalc/base" schemaLocation="base.xsd"/>
+    <xs:element name="cusers">
+        <xs:annotation>
+            <xs:documentation>用户配置</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="base:abstractLogic">
+                    <xs:all maxOccurs="1" minOccurs="0">
+                        <xs:element name="members" maxOccurs="1" minOccurs="0">
+                            <xs:complexType>
+                                <xs:attribute name="account"  use="required"/>
+                                <xs:attribute name="fullName" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="nodes" maxOccurs="1" minOccurs="0">
+                            <xs:complexType>
+                                <xs:attribute name="nodeId"  use="required"/>
+                                <xs:attribute name="nodeName" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="executorVar" type="base:executorVar" maxOccurs="1" minOccurs="0"/>
+                    </xs:all>
+                    <xs:attribute name="source" type="base:userType" use="required">
+                        <xs:annotation>
+                            <xs:documentation>用户类型</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

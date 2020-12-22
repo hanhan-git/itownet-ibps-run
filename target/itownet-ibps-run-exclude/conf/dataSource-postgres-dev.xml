@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSources>
+  <dataSource>
+    <name>def</name>
+    <alias>dataSource_default</alias>
+
+	<dbType>postgres</dbType>
+    <driver>org.postgresql.Driver</driver>
+    <driverUrl>jdbc:postgresql://192.168.3.210:5432/ibps_test_business_v3.2.0</driverUrl>
+    <user>root</user>
+    <password>root</password>
+    
+    <status>actived</status>
+    <isDefault>true</isDefault>
+    <variables>
+      <testOnBorrow>false</testOnBorrow>
+      <testWhileIdle>true</testWhileIdle>
+      <validationQuery>SELECT 1 FROM IBPS_RIGHTS_CONF</validationQuery>
+      <maxPoolPreparedStatementPerConnectionSize>20</maxPoolPreparedStatementPerConnectionSize>
+      <removeAbandonedTimeout>1800</removeAbandonedTimeout>
+      <testOnReturn>false</testOnReturn>
+      <logAbandoned>true</logAbandoned>
+      <poolPreparedStatements>true</poolPreparedStatements>
+      <maxActive>200</maxActive>
+      <minIdle>20</minIdle>
+      <initialSize>20</initialSize>
+      <maxWait>3600000</maxWait>
+      <removeAbandoned>true</removeAbandoned>
+      <timeBetweenEvictionRunsMillis>3600000</timeBetweenEvictionRunsMillis>
+      <minEvictableIdleTimeMillis>300000</minEvictableIdleTimeMillis>
+      <filters>stat</filters>
+    </variables>
+  </dataSource>
+</dataSources>

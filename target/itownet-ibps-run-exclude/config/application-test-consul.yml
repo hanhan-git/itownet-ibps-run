@@ -1,0 +1,18 @@
+consul:
+  serviceUrl:
+    defaultZone: ${CONSUL_SERVICEURL_DEFAULTZONE:http://192.168.3.230:18500}
+spring:
+  cloud:
+    consul:
+      host: ${SPRING_CLOUD_CONSUL_HOST:192.168.3.230} 
+      port: ${SPRING_CLOUD_CONSUL_PORT:18500}
+      discovery:
+        health-check-path: /health
+        health-check-interval: 20s
+        instance-id: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+        hostname: ${spring.cloud.client.ip-address}
+        port: ${server.port}
+        # org.springframework.cloud.consul.discovery.ConsulDiscoveryProperties.defaultZoneMetadataName
+        defaultZoneMetadataName: test
+        tags: 
+        - test

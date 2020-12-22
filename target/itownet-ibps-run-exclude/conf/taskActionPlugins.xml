@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskActions xmlns="http://www.bpmhome.cn/bpm/plugin/taskAction"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.bpmhome.cn/bpm/plugin/taskAction taskActionPlugin.xsd"
+    namesxmlns="http://www.bpmhome.cn/bpm/plugin/taskAction">
+    
+    <taskAction name="lock" supportType="both" actionType="assist" script="false" init="true">
+        <description value="锁定"/>
+        <handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="unlock" supportType="both" actionType="assist" script="false" init="true">
+        <description value="解锁"/>
+        <handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="forceUnlock" supportType="both" actionType="assist" script="false" init="false">
+        <description value="强制解锁"/>
+        <handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="agree" supportType="both" actionType="approve" script="true" init="true">
+        <description value="同意"/>
+        <handlerClass value="taskActionAgreeHandler"/>
+    </taskAction>
+    
+    <taskAction name="save" supportType="both" actionType="other" script="true" init="true">
+        <description value="保存"/>
+        <handlerClass value="taskActionNoneHandler"/>
+    </taskAction>
+ 
+    <taskAction name="abandon" supportType="signtask" actionType="approve" script="true" init="false">
+        <description value="弃权"/>
+        <handlerClass value="taskActionAgreeHandler"/>
+    </taskAction>
+    
+    <taskAction name="oppose" supportType="both" actionType="approve" script="true" init="false">
+        <description value="反对"/>
+        <handlerClass value="taskActionAgreeHandler"/>
+    </taskAction>
+    
+    <!-- 
+    <taskAction name="agreeTrans" supportType="both" actionType="trans" script="true" init="true">
+        <description value="同意(流转)"/>
+        <handlerClass value="taskActionTransHandler"/>
+    </taskAction>
+    
+    <taskAction name="opposeTrans" supportType="both" actionType="trans" script="true" init="true">
+        <description value="反对(流转)"/>
+        <handlerClass value="taskActionTransHandler"/>
+    </taskAction>
+    
+    <taskAction name="commu" supportType="both" actionType="commu" script="true" init="true">
+        <description value="沟通反馈"/>
+        <handlerClass value="taskActionCommuHandler"/>
+    </taskAction>
+    
+    <taskAction name="startCommu" supportType="both" actionType="other" script="false" init="true">
+    	<description value="发起沟通"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="startTrans" supportType="usertask" actionType="other" script="false" init="true">
+    	<description value="发起流转"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    -->
+     
+    <taskAction name="reject" supportType="both" actionType="reject" script="true" init="true">
+        <description value="驳回"/>
+        <handlerClass value="taskActionRejectHandler"/>
+    </taskAction>
+    
+    <taskAction name="rejectToStart" supportType="both" actionType="rejectToStart" script="true" init="true">
+        <description value="驳回发起人"/> 
+        <handlerClass value="taskActionRejectToStartHandler"/>
+    </taskAction>
+    
+    <taskAction name="rejectToPrevious" supportType="both" actionType="rejectToPrevious" script="true" init="true">
+        <description value="驳回上一步"/> 
+        <handlerClass value="taskActionRejectToPreviousHandler"/>
+    </taskAction>
+    
+    <!-- 其他节点和界面按钮相关 -->
+    
+    <taskAction name="startFlow" supportType="start" actionType="other" script="true" init="true">
+    	<description value="启动"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+  	<taskAction name="saveDraft" supportType="start" actionType="other" script="true" init="true">
+    	<description value="保存草稿"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="delegate" supportType="both" actionType="other" script="false" init="true">
+    	<description value="转办"/>
+    	<handlerClass value=""/>
+    </taskAction>
+     
+    <taskAction name="addSign" supportType="signtask" actionType="other" script="false" init="true">
+    	<description value="补签"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+   <taskAction name="approvalHistory" supportType="both" actionType="approve" script="false" init="true">
+    	<description value="审批历史"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="flowImage" supportType="all" actionType="other" script="false" init="true">
+    	<description value="流程图"/>
+    	<handlerClass value=""/>
+    </taskAction>
+
+	<taskAction name="print" supportType="all" actionType="other" script="false" init="true">
+    	<description value="打印"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="endProcess" supportType="both" actionType="other" script="true" init="true">
+    	<description value="终止流程"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="suspendProcess" supportType="both" actionType="other" script="true" init="true">
+    	<description value="挂起"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="recoverProcess" supportType="both" actionType="other" script="true" init="true">
+    	<description value="恢复"/>
+    	<handlerClass value=""/>
+    </taskAction>
+    
+    <taskAction name="revoke" supportType="none" actionType="revoke" script="false" init="false">
+        <description value="撤销"/>
+        <handlerClass value="taskActionRevokeHandler"/>
+    </taskAction>
+    
+    <!--
+    <taskAction name="trigger" supportType="both" actionType="trigger" script="true" init="false">
+        <description value="触发流程"/>
+        <handlerClass value="taskActionTriggerHandler"/>
+    </taskAction>
+    -->
+    
+    <taskAction name="custom" supportType="both" actionType="custom" script="true" init="false">
+        <description value="[自定义按钮]"/>
+        <handlerClass value="taskActionCustomHandler"/>
+    </taskAction>
+    
+</taskActions>

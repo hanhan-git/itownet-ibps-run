@@ -1,0 +1,5 @@
+spring:
+ profiles:
+  include: dev-base,dev-socket,dev-fileserver
+server:
+  port: 8080

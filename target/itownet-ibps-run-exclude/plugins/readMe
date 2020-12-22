@@ -1,0 +1,5 @@
+# 1.插件开发请参考ibps-skeleton-plugin-script工程；
+# 2.插件工程必须在根目录下创建plugin.json文件，具体内容参考ibps-skeleton-plugin-script/src/main/resources/plugin.json；
+# 3.插件jar文件放入应用plugins目录即可；
+# 4.暂不支持热加载，每次更新插件必须重启应用；
+# 5.加载到Spring容器中，beanId是类名首字母转小写；如：PluginScript加载后beanId是pluginScript；

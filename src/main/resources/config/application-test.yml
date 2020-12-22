@@ -1,0 +1,5 @@
+spring:
+ profiles:
+  include: test-base,test-socket,test-fileserver
+server:
+  port: 15400

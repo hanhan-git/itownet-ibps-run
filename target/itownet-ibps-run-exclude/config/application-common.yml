@@ -1,0 +1,97 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    include: undertow
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  messages:
+    default-locale: en_US
+    locale-change-param-name: lang
+    basename: i18n/messages
+    cache-seconds: 3600
+    encoding: UTF-8
+  http:
+    multipart:
+      max-file-size: 100MB # 最大支持文件大小
+      max-request-size: 100MB # 最大支持请求大小    
+  ##spring boot用于设置上传文件大小--MultipartProperties.class
+  servlet:
+    multipart:
+      max-file-size: 100MB # 最大支持文件大小
+      max-request-size: 100MB # 最大支持请求大小    
+  security:
+    user:
+      name: ibps
+      password: ibps@123
+app:
+  id: ${spring.application.name}
+  version: 3.3.3-LC.RELEASE
+  weights:
+    - host: 192.168.3.210
+      weight: 10
+    - host: 192.168.3.220
+      weight: 10
+    - host: 192.168.3.230
+      weight: 10
+    - host: 192.168.3.240
+      weight: 10
+security:
+  basic:
+    enabled: false      
+management:
+  port: 8099
+  security:
+    enabled: false
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    env:
+      enabled: true
+    mappings:
+      enabled: false
+  health:
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    rabbit:
+      enabled: false
+    mongo:
+      enabled: false
+logging:
+  config: classpath:config/log4j2.yml 
+##---------邮箱配置---------
+mail:
+  notify-to: ${MAIL_NOTIFY_TO:}
+  from-address: ${MAIL_FROM_ADDRESS:}
+  host: ${MAIL_HOST:smtp.163.com}
+  mail-address: ${MAIL_ADDRESS:}
+  username: ${MAIL_USERNAME:}
+  password: ${MAIL_PASSWORD:}
+  ## 端口号 如果启用 163用465/994
+  port: ${MAIL_PORT:465}
+  default-encoding: utf-8
+  ## 尝试使用AUTH命令认证用户
+  smtp:
+    auth: true
+    ssl:
+      enable: true
+    starttls:
+      enable: false
+  ## 服务协议
+  transport:
+    protocol: ${MAIL_TRANSPORT_PROTOCOL:smtps}  
+##  
+env: ${spring.profiles.active}
+apollo:
+   meta: ${APOLLO_META:http://192.168.3.220:8080}
+   bootstrap:
+      enabled: ${APOLLO_BOOTSTRAP_ENABLED:false}

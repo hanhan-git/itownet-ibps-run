@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"    xmlns="http://www.bpmhome.cn/ibps-bpm-def" 
+	targetNamespace="http://www.bpmhome.cn/ibps-bpm-def" elementFormDefault="qualified">
+	
+	<xs:element name="bpmdef" type="bpmdef"></xs:element>
+    
+    <xs:complexType name="bpmdef">
+		<xs:sequence>
+			<xs:element name="defId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="defKey" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="desc" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="typeId" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="status" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="testStatus" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="bpmnDefId" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="bpmnDeployId" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="version" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="mainDefId" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="isMain" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="reason" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			
+			<!-- 流程定义xml内容 -->
+			<xs:element name="bpmdefxml" type="bpmdefxml" maxOccurs="1" minOccurs="1"></xs:element>
+			<!-- 流程催办设置 -->
+			<xs:element name="reminders" type="reminders" maxOccurs="1" minOccurs="0"></xs:element>
+			<!-- 流程触发流程设置 -->
+			<xs:element name="trigerFlows" type="trigerFlows" maxOccurs="1" minOccurs="0"></xs:element>
+			<!-- 流程授权数据 -->
+			<xs:element name="auths" type="auths" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="auths">
+		<xs:sequence>
+			<xs:element name="auth" type="auth" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="auth">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			
+			<xs:element name="authdefs" type="authdefs" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="rightdefs" type="rightdefs" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="authdefs">
+		<xs:sequence>
+			<xs:element name="authdef" type="authdef" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="authdef">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="authId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="defKey" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="defName" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="rights" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="rightdefs">
+		<xs:sequence>
+			<xs:element name="rightdef" type="rightdef" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="rightdef">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="entityType" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="entityId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="type" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="rightsId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="rightsName" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="bpmdefxml">
+		<xs:sequence>
+			<xs:element name="defxml" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="bpmnxml" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="reminders">
+		<xs:sequence>
+			<xs:element name="reminder" type="reminder" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="reminder">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="procDefId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="nodeId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="relNodeId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="relNodeEvent" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="relTimeType" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="cronExpression" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="callScript" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="startTime" type="xs:int" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="interval" type="xs:int" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="sendTimes" type="xs:short" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="dueTime" type="xs:int" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="dueAction" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="msgTypeHtml" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="html" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="msgTypePt" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="plainText" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trigerFlows">
+		<xs:sequence>
+			<xs:element name="trigerFlow" type="trigerFlow" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trigerFlow">
+		<xs:sequence>
+			<xs:element name="defId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="nodeId" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="trigerFlowKey" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="action" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="trigerType" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="callStartPage" type="xs:string" maxOccurs="1" minOccurs="0"></xs:element>
+			
+			<xs:element name="trigerParams" type="trigerParams" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="trigerParams">
+		<xs:sequence>
+			<xs:element name="trigerParam" type="trigerParam" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="trigerParam">
+		<xs:sequence>
+			<xs:element name="srcAttr" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="srcAttrName" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="destAttr" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="destAttrName" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element name="allowEmpty" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

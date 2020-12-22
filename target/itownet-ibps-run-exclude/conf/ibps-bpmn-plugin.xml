@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+		"> 	
+	<!--加入bpmn plugin-->	
+	
+
+	<!-- ## 插件bean声明 -->
+	<!-- #### 流程插件开始 -->
+	<!-- 用户分配插件 -->
+	<bean id="userAssignPluginContext" class="com.lc.ibps.bpmn.plugin.task.userassign.context.UserAssignPluginContext" scope="prototype" autowire="byType"></bean>	
+	<bean id="userAssignPlugin" class="com.lc.ibps.bpmn.plugin.task.userassign.plugin.UserAssignPlugin" autowire="default"></bean>	
+	<bean id="userQueryPlugin" class="com.lc.ibps.bpmn.plugin.task.userassign.plugin.UserQueryPlugin" autowire="default"></bean>
+	
+	<!-- #### 流程插件结束-->
+	
+	<!-- 用户插件 -->
+	<bean id="cusersPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.cusers.context.CusersPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="cusersPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.cusers.runtime.CusersPlugin" autowire="default"/>
+	
+	<!-- 按用户组查找用户 -->
+	<bean id="groupPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.group.context.GroupPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="groupPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.group.runtime.GroupPlugin" autowire="default"/>
+	
+	<!-- 按照参与者等级查询用户 --> 
+	<bean id="levelPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.level.context.LevelPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="levelPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.level.runtime.LevelPlugin" autowire="default"/>
+	
+	<!-- 按用户组织查找用户 -->
+	<bean id="orgPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.org.context.OrgPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="orgPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.org.runtime.OrgPlugin" autowire="default"/>
+	
+	<!-- 按照角色查找用户 -->
+	<bean id="rolePluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.role.context.RolePluginContext" scope="prototype" autowire="byType"/>
+	<bean id="rolePlugin" class="com.lc.ibps.bpmn.plugin.usercalc.role.runtime.RolePlugin" autowire="default"/>
+
+	<!-- 按照岗位查找用户 -->
+	<bean id="posPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.pos.context.PosPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="posPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.pos.runtime.PosPlugin" autowire="default"/>
+	
+	<!-- 组织负责人查找用户 -->
+	<bean id="orgManagerPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.orgmanager.context.OrgManagerPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="orgManagerPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.orgmanager.runtime.OrgManagerPlugin" autowire="default"/>
+	
+	<!-- 上下级查找用户 -->
+	<bean id="userGradePluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.usergrade.context.UserGradePluginContext" scope="prototype" autowire="byType"/>
+	<bean id="userGradePlugin" class="com.lc.ibps.bpmn.plugin.usercalc.usergrade.runtime.UserGradePlugin" autowire="default"/>	
+	
+	<!-- 指定节点
+	<bean id="sameNodePluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.samenode.context.SameNodePluginContext" scope="prototype" autowire="byType"/>
+	<bean id="sameNodePlugin" class="com.lc.ibps.bpmn.plugin.usercalc.samenode.runtime.SameNodePlugin" autowire="default"/> -->
+	
+	<!-- 流程实例执行人 -->
+	<bean id="approverPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.approver.context.ApproverPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="approverPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.approver.runtime.ApproverPlugin" autowire="default"></bean>
+	
+	<!-- 按照脚本查找用户 -->
+	<bean id="hrScriptPluginContext" class="com.lc.ibps.bpmn.plugin.usercalc.script.context.HrScriptPluginContext" scope="prototype" autowire="byType"/>
+	<bean id="hrScriptPlugin" class="com.lc.ibps.bpmn.plugin.usercalc.script.runtime.HrScriptPlugin" autowire="default"/>
+	
+	<!-- #### 用户计算策略插件结束 -->
+	
+	<bean id="startFlowPluginContext" class="com.lc.ibps.bpmn.plugin.execution.startflow.context.StartFlowPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="startFlowPlugin" class="com.lc.ibps.bpmn.plugin.execution.startflow.plugin.StartFlowPlugin" autowire="default"></bean>
+	
+	<!-- 通知插件 -->
+	<bean id="taskNotifyPluginContext" class="com.lc.ibps.bpmn.plugin.task.tasknotify.context.TaskNotifyPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="taskNotifyPlugin" class="com.lc.ibps.bpmn.plugin.task.tasknotify.plugin.TaskNotifyPlugin" autowire="default">
+	</bean>
+	<bean id="procNotifyPluginContext" class="com.lc.ibps.bpmn.plugin.execution.procnotify.context.ProcNotifyPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="procNotifyPlugin" class="com.lc.ibps.bpmn.plugin.execution.procnotify.plugin.ProcNotifyPlugin" autowire="default"></bean>	
+	
+	<bean id="notifyHelper" class="com.lc.ibps.bpmn.plugin.task.tasknotify.helper.NotifyHelper" autowire="default"></bean>
+	
+	<!-- 抄送插件 -->
+	<bean id="taskCopyToPluginContext" class="com.lc.ibps.bpmn.plugin.task.taskcopyto.context.TaskCopyToPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="taskCopyToPlugin" class="com.lc.ibps.bpmn.plugin.task.taskcopyto.plugin.TaskCopyToPlugin" autowire="default"></bean>
+	
+	<!-- 任务节点脚本 -->
+	<bean id="taskscriptPluginContext" class="com.lc.ibps.bpmn.plugin.task.script.context.TaskscriptPluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="taskScriptPlugin" class="com.lc.ibps.bpmn.plugin.task.script.plugin.TaskScriptPlugin" autowire="default"></bean>
+	
+	<!-- 脚本节点插件 -->
+	<bean id="scriptNodePluginContext" class="com.lc.ibps.bpmn.plugin.execution.script.context.ScriptNodePluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="scriptNodePlugin" class="com.lc.ibps.bpmn.plugin.execution.script.plugin.ScriptNodePlugin" autowire="default"></bean>
+	
+	<!-- 消息节点插件 -->
+	<bean id="messagePluginContext" class="com.lc.ibps.bpmn.plugin.execution.message.context.MessagePluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="messagePlugin" class="com.lc.ibps.bpmn.plugin.execution.message.plugin.MessagePlugin" autowire="default"></bean>
+	
+	<!-- service 节点 - 旧 -->
+	<!--
+	<bean id="webServicePluginContext" class="com.lc.ibps.bpmn.plugin.execution.webservice.context.WebServicePluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="webServicePlugin" class="com.lc.ibps.bpmn.plugin.execution.webservice.plugin.WebServiceTaskPlugin" autowire="default"></bean>
+	-->
+	
+	<!-- service 节点 - 新 -->
+	<bean id="servicePluginContext" class="com.lc.ibps.bpmn.plugin.execution.service.context.ServicePluginContext" scope="prototype" autowire="byType"></bean>
+	<bean id="servicePlugin" class="com.lc.ibps.bpmn.plugin.execution.service.plugin.ServicePlugin" autowire="default"></bean>
+	
+	<!-- 用户插件声明 -->
+	<bean id="nodeUserPluginList" class="java.util.ArrayList">
+		<constructor-arg index="0">
+			<list>
+				<!-- 用户  -->
+			 	<ref bean="cusersPluginContext" />
+			 	<!-- 用户组  -->
+			 	<ref bean="groupPluginContext" />
+			 	<!-- 组织  -->
+			 	<ref bean="orgPluginContext" />
+			 	<!-- 角色  -->
+			 	<ref bean="rolePluginContext" />
+			 	<!-- 岗位  -->
+			 	<ref bean="posPluginContext" />
+			 	<!-- 组织负责人  -->
+			 	<ref bean="orgManagerPluginContext" />
+			 	<!-- 参与者类型 -->
+			 	<ref bean="levelPluginContext"/>
+			 	<!-- 用户上下级  -->
+			 	<ref bean="userGradePluginContext" />
+			 	<!-- 相同节点的执行人
+			 	<ref bean="sameNodePluginContext" /> -->
+			 	<!-- 流程实例审批人 -->
+			 	<ref bean="approverPluginContext" />
+			 	<!-- 脚本 -->
+			 	<ref bean="hrScriptPluginContext" /> 
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 自动任务支持的列表 -->
+	<bean id="autoTaskPluginList" class="java.util.ArrayList">
+  		<constructor-arg>
+		   <list>
+		  		<ref bean="scriptNodePluginContext"/>
+		  		<ref bean="messagePluginContext"/>
+		  		<!-- <ref bean="webServicePluginContext"/> -->
+		  		<ref bean="servicePluginContext"/>
+		   </list>
+  		</constructor-arg>
+ 	</bean>
+	
+</beans>

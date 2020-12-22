@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<!-- 业务注入 -->
+	<context:component-scan base-package="com.lc.ibps">
+		<context:include-filter type="annotation" expression="org.springframework.transaction.annotation.Transactional" />
+	</context:component-scan>
+	<!-- 事务管理 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="jtaTransactionManager" />
+
+	<!-- freemaker引擎 -->
+	<bean id="freemarkerEngine" class="com.lc.ibps.base.core.engine.freemarker.FreemarkerEngine">
+		<property name="configuration" ref="freemarkerConfiguration" />
+	</bean>	  
+	<!-- 文件模版引擎配置 -->
+	<bean id="templateLoader" class="freemarker.cache.StringTemplateLoader"></bean>
+	<bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+		<property name="templateLoaderPath" value="classpath:template/" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<!-- 当前上下文工具类，这里是注入com.lc.ibps.base.web.context.LoginContext实例。 -->
+	<bean id="loginContext" class="com.lc.ibps.web.context.LoginContext"/>
+	<bean id="contextUtil" class="com.lc.ibps.base.web.context.ContextUtil">
+		<property name="currentContext" ref="loginContext"></property>
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+		  	<tx:method name="get*" read-only="true"  />
+			<tx:method name="is*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="query*" read-only="true"/>
+			<tx:method name="*" isolation="DEFAULT"/>
+		</tx:attributes>
+	</tx:advice>
+	
+    <!--事务配置示例-->
+    <aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.lc.ibps.bpmn.core.engine..*(..))" order="1" />
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.lc.ibps.base.db.table.impl..*(..))" order="1" />
+	</aop:config>
+	
+	<bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource" scope="prototype">
+		<property name="basenames">
+			<list>
+				<value>classpath:i18n/messages_bpmn</value>
+			</list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+        <property name="cacheSeconds" value="0"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+	
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<!-- 会话属性不存在,默认属性设置 -->
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">    
+	    <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>    
+	    <!-- 这里配置将使用上面国际化配置的messageSource -->  
+	    <property name="validationMessageSource" ref="messageSource"/>    
+	</bean>
+
+	<!-- 连接池统计配置 -->
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+	    <property name="slowSqlMillis" value="10000" />
+	    <property name="logSlowSql" value="true" />
+	     <property name="mergeSql" value="true" />
+   </bean>
+   
+</beans>

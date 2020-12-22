@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 空处理器 -->
+	<bean id="taskActionNoneHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionNoneHandler"/>
+	<!-- 任务同意处理器 -->
+	<bean id="taskActionAgreeHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionApproveHandler"/>
+	<!-- 任务撤回处理器 -->
+	<bean id="taskActionRevokeHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionRevokeHandler"/>
+	<!-- 任务回退处理器 -->
+	<bean id="taskActionRejectHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionRejectHandler"/>
+	<!-- 任务回退上一步处理器 -->
+	<bean id="taskActionRejectToPreviousHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionRejectPreviousHandler"/>
+	<!-- 任务回退至发起人处理器 -->
+	<bean id="taskActionRejectToStartHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionRejectToStartHandler"/>
+	<!-- 任务触发流程按钮处理器 -->
+	<bean id="taskActionTriggerHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionTriggerHandler"/>
+	<!-- 任务自定义按钮处理器 -->
+	<bean id="taskActionCustomHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionCustomHandler"/>
+	<!-- 任务辅助处理器 
+	<bean id="taskActionAssistHandler" class="com.lc.ibps.bpmn.handler.userTask.TaskActionAssistHandler"/>-->
+	<!-- 流程沟通处理器 
+	<bean id="taskActionCommuHandler" class="com.lc.ibps.bpmn.core.engine.task.handler.TaskActionCommuHandler"/> -->
+	
+</beans>
